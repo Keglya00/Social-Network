@@ -1,0 +1,14 @@
+.message{
+    background-color: white;
+    width: fit-content;
+    padding: 3px;
+    margin: 5px 0;
+}
+
+.mymessage__inner{
+    text-align: right;
+    background-color: #BEA895;
+    display:inline-block;
+    margin: 5px 0;
+}
+

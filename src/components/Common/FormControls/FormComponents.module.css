@@ -1,0 +1,27 @@
+.required__requiredSign {
+    width: 25px;
+    height: 25px;
+}
+
+.required__input {
+    width: 300px;
+    height: 30px;
+    margin: 5px 0;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.required__input_error {
+    width: 300px;
+    height: 30px;
+    margin: 5px 0;
+    border-radius: 20px;
+    font-size: 14px;
+    border: red 2px solid;
+}
+
+.required {
+    padding: 0 45px;
+    display: flex;
+    align-items: center;
+}

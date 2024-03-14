@@ -1,0 +1,11 @@
+.page_active{
+    font-weight: 700;
+    font-size: 17px;
+    padding: 0 5px;
+}
+
+.page{
+    transition: .3s;
+    padding: 0 5px;
+    cursor: pointer;
+}

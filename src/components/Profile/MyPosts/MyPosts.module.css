@@ -1,0 +1,32 @@
+.MyPosts__addPost_textarea{
+    resize: none;
+    outline: none;
+    box-shadow: 2px 2px 2px 1px  #6F4E37;
+    height: 200px;
+    width: 700px;
+    margin: 15px 0 10px 0;
+    border-radius: 10px;
+}
+
+.MyPosts__title{
+    font-size: 24px;
+    font-family: Roboto;
+    font-weight: 700;
+    margin-top: 160px;
+}
+
+.MyPosts__addPost_button{
+    background-color:  #BEA895;
+    box-shadow: 2px 2px 2px 1px  #6F4E37;
+    color: white;
+    padding: 10px 30px;
+    margin-top: 10px;
+    margin-right: 600px;
+    border-radius: 50px;
+    transition: .3s;
+}
+
+.MyPosts__addPost_button:hover{
+    transform: scale(1.05);
+}
+

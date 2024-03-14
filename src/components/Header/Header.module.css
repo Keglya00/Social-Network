@@ -1,0 +1,44 @@
+.header{
+  grid-area: header;
+  background-color: #BEA895;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  height: 60px;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 2px 1px  #6F4E37;
+}
+
+.header__top{
+  display: flex;
+}
+
+.header__top_name{
+  padding-left:20px;
+  color: white;
+  font-size: 20px;
+  font-family: Roboto, sans-serif;
+  font-weight:700;
+  }
+
+.header__top_logo{
+  padding-left: 15px;
+}
+
+.header__login{
+  display: flex;
+  color: white;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight:700;
+  align-items: center;
+  text-align: right;
+  margin: 0 30px;
+}
+
+.header__login_avatar{
+  border-radius: 50px;
+  height: 50px;
+  margin: 0 10px;
+}

@@ -1,0 +1,25 @@
+.user{
+    display: flex;
+    align-items: center;
+}
+
+.user__noavatar{
+    background-color:#BEA895;
+    display: inline-block;
+    padding: 15px 15px;
+    border-radius: 50px;
+}
+
+.user__avatar{
+    border-radius: 50px;
+    width: 55px;
+    height: 55px;  
+}
+
+.user__description{
+    padding-left: 5px;
+}
+
+.user__description_status{
+    opacity: 0.7;
+}
