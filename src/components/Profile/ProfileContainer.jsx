@@ -8,10 +8,20 @@ import { withAuthReirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
 class ProfileApiComponent extends React.PureComponent {
-    
-    componentDidMount() {
+
+    renderProfile = () => {
         let userId = this.props.params.userId
         this.props.getUsersProfile(userId)
+    }
+
+    componentDidMount() {
+        this.renderProfile()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.params.userId != this.props.params.userId){
+            this.renderProfile()           
+        }           
     }
 
     render() {
