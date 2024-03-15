@@ -2,6 +2,8 @@
     height: 150px;
     width: 150px;
     border-radius: 50px;
+    display: flex;
+    align-items: flex-end;
   }
   
   .content__top_description{
@@ -15,4 +17,23 @@
   
   .content__top{
     display: flex;
+  }
+  
+  .content__avatar_input{
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+
+  .content__avatar_button{
+    position: absolute;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .content__avatar_container{
+    margin-bottom: 20pxgit;
   }

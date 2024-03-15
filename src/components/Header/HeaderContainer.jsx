@@ -6,6 +6,16 @@ import { setUsersAvatarThunkCreator, logoutThunkCreator } from './../../redux/au
 
 class HeaderApiComponent extends React.PureComponent {
 
+    componentDidMount(){
+        this.userAuthorased()       
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.profile != prevProps.profile){
+            this.userAuthorased()
+        }        
+    }
+
     userAuthorased = () => {
         this.props.setUsersAvatarThunkCreator(this.props.userAuthData.id)
     }
@@ -24,7 +34,8 @@ let mapStateToProps = (state) => {
         userAuthData: state.authReducer.data,
         userAvatar: state.authReducer.userAvatar,
         isAuth: state.authReducer.isAuth,
-        isFetching: state.authReducer.isFetching
+        isFetching: state.authReducer.isFetching,
+        profile: state.profileReducer.profile
     }
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUsersProfile, updateStatus } from './../../redux/profileReducer';
+import { getUsersProfile, updateStatus, saveAvatar } from './../../redux/profileReducer';
 import Profile from './Profile';
 import Preloader from "../Common/Preloader/Preloader";
 import withRouter from './../../withRouter';
@@ -28,7 +28,7 @@ class ProfileApiComponent extends React.PureComponent {
         return (
             <>
                 {this.props.isFetching ? <Preloader /> : null}
-                {this.props.profile ? <Profile profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} /> : null }
+                {this.props.profile ? <Profile profile={this.props.profile} saveAvatar={this.props.saveAvatar} isOwner={this.props.params.userId == this.props.ownerId} status={this.props.status} updateStatus={this.props.updateStatus} /> : null }
             </>
         )
     }
@@ -36,12 +36,13 @@ class ProfileApiComponent extends React.PureComponent {
 
 let mapStateToProps = (state) => {
     return {
+        ownerId: state.authReducer.data.id,
         profile: state.profileReducer.profile,
         status: state.profileReducer.status,
         isFetching: state.profileReducer.isFetching
     }
 }
 
-const ProfileContainer = compose(connect(mapStateToProps, {getUsersProfile, updateStatus }), withAuthReirect, withRouter )(ProfileApiComponent)
+const ProfileContainer = compose(connect(mapStateToProps, {getUsersProfile, updateStatus, saveAvatar }), withAuthReirect, withRouter )(ProfileApiComponent)
 
 export default ProfileContainer

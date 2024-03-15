@@ -31,6 +31,13 @@ export const updateUserStatus = (status) => {
     .put(`/profile/status`, {status: status})
 }
 
+export const saveUserAvatar = (avatar) => {
+    let formData = new FormData()
+    formData.append("image", avatar)
+    return instance
+    .put(`/profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
+}
+
 export const getLoginData = () => {
     return instance
     .get(`/auth/me`)

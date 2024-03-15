@@ -1,10 +1,11 @@
-import {getUserProfile, getUserStatus, updateUserStatus} from './../API'
+import {getUserProfile, getUserStatus, saveUserAvatar, updateUserStatus} from './../API'
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE '
 const SET_USER_STATUS = 'SET_USER_STATUS '
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const DELETE_POST = 'DELETE_POST'
+const SET_USER_AVATAR = 'SET_USER_AVATAR'
 
 let initialState = {
     postsData: [
@@ -47,6 +48,13 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status
             }
         }
+        case SET_USER_AVATAR: {
+            debugger
+            return{
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
+        }
         case DELETE_POST: {
             return{
                 ...state,
@@ -63,6 +71,9 @@ export const deletePost = (postId) => {return {type: DELETE_POST, postId}}
 export const setUserProfile = (profile) => {return {type: SET_USER_PROFILE, profile}}
 export const toggleIsFetching = (isFetching) => {return{type: TOGGLE_IS_FETCHING, isFetching}}
 export const getStatus = (status) => {return {type:SET_USER_STATUS, status}}
+export const getAvatar = (photos) => {
+    debugger
+    return {type: SET_USER_AVATAR, photos }} 
 export const getUsersProfile = (userId) => async (dispatch) => {
     dispatch(toggleIsFetching(true))
     let data = await getUserProfile(userId)
@@ -75,6 +86,13 @@ export const updateStatus = (status) => async (dispatch) => {
     let data = await updateUserStatus(status)
     if(data.resultCode === 0) {
         dispatch(getStatus(status))
+    }
+}
+
+export const saveAvatar = (avatar) => async (dispatch) => {
+    let data = await saveUserAvatar(avatar)
+    if(data.data.resultCode === 0) {
+        dispatch(getAvatar(data.data.data.photos))
     }
 }
 export default profileReducer

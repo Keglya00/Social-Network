@@ -14,7 +14,7 @@ const Header = (props) => {
                 </div>
             </div>
                 <div className={headerStyle.header__login}>
-                    {props.isAuth ? props.userAuthorised() : <NavLink to='/login' className={headerStyle.header__login}>Login</NavLink> }
+                    {props.isAuth ? null : <NavLink to='/login' className={headerStyle.header__login}>Login</NavLink> }
                     {props.isAuth && props.userAvatar ? <img src={props.userAvatar} className={headerStyle.header__login_avatar} /> : null }
                     {props.isAuth ? props.login : null}
                     {props.isAuth ? <button onClick={props.logout}>logout</button> : null }
