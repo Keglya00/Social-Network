@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUsersProfile, updateStatus, saveAvatar } from './../../redux/profileReducer';
+import { getUsersProfile, updateStatus, saveAvatar, uploadAboutMe, setAboutMe, setNickName, uploadNickName } from './../../redux/profileReducer';
 import Profile from './Profile';
 import Preloader from "../Common/Preloader/Preloader";
 import withRouter from './../../withRouter';
@@ -24,11 +24,28 @@ class ProfileApiComponent extends React.PureComponent {
         }           
     }
 
+    setUserNickName = (nickName) => {
+        this.props.setNickName(nickName)
+        this.props.uploadNickName(this.props.profile, nickName)     
+    }
+
+    setUserAboutMe = (aboutMe) => {
+        this.props.setAboutMe(aboutMe)
+        this.props.uploadAboutMe(this.props.profile, aboutMe)
+    }
+
     render() {
         return (
             <>
                 {this.props.isFetching ? <Preloader /> : null}
-                {this.props.profile ? <Profile profile={this.props.profile} saveAvatar={this.props.saveAvatar} isOwner={this.props.params.userId == this.props.ownerId} status={this.props.status} updateStatus={this.props.updateStatus} /> : null }
+                {this.props.profile ? <Profile 
+                profile={this.props.profile} 
+                saveAvatar={this.props.saveAvatar} 
+                isOwner={this.props.params.userId == this.props.ownerId} 
+                status={this.props.status} 
+                updateStatus={this.props.updateStatus}
+                setUserAboutMe={this.setUserAboutMe}
+                /> : null }
             </>
         )
     }
@@ -43,6 +60,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-const ProfileContainer = compose(connect(mapStateToProps, {getUsersProfile, updateStatus, saveAvatar }), withAuthReirect, withRouter )(ProfileApiComponent)
+const ProfileContainer = compose(connect(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setNickName, setAboutMe }), withAuthReirect, withRouter, uploadNickName )(ProfileApiComponent)
 
 export default ProfileContainer

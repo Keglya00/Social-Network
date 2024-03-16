@@ -1,0 +1,47 @@
+.aboutMe__title{
+    font-weight: 700;
+}
+
+.aboutMe__button_check{
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.aboutMe__button_check:hover{
+    opacity: 1;
+}
+
+.aboutMe__field {
+    display: flex;
+    line-height: 0.5;
+    align-items: center;
+}
+
+.aboutMe__field_text{
+    padding-right: 10px;
+    font-size: 16px;
+}
+
+.aboutMe__field_button{
+    opacity: 0.5;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.aboutMe__field_button:hover{
+    opacity: 1;
+}
+
+.aboutMe__textarea{
+    height: 18px;
+    width: 600px;
+    resize: none;
+    outline: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    font-size: 15px;
+}

@@ -1,4 +1,4 @@
-import {getUserProfile, getUserStatus, saveUserAvatar, updateUserStatus} from './../API'
+import {getUserProfile, getUserStatus, saveAboutMe, saveNewProfile, saveUserAvatar, updateUserStatus} from './../API'
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE '
@@ -6,6 +6,8 @@ const SET_USER_STATUS = 'SET_USER_STATUS '
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const DELETE_POST = 'DELETE_POST'
 const SET_USER_AVATAR = 'SET_USER_AVATAR'
+const SET_ABOUT_ME = 'SET_ABOUT_ME'
+const SET_NICKNAME = 'SET_NICKNAME'
 
 let initialState = {
     postsData: [
@@ -49,10 +51,16 @@ const profileReducer = (state = initialState, action) => {
             }
         }
         case SET_USER_AVATAR: {
-            debugger
             return{
                 ...state,
                 profile: {...state.profile, photos: action.photos}
+            }
+        }
+        case SET_ABOUT_ME: {
+            debugger
+            return{
+                ...state,
+                profile: {...state.profile, aboutMe: action.aboutMe}
             }
         }
         case DELETE_POST: {
@@ -71,9 +79,9 @@ export const deletePost = (postId) => {return {type: DELETE_POST, postId}}
 export const setUserProfile = (profile) => {return {type: SET_USER_PROFILE, profile}}
 export const toggleIsFetching = (isFetching) => {return{type: TOGGLE_IS_FETCHING, isFetching}}
 export const getStatus = (status) => {return {type:SET_USER_STATUS, status}}
-export const getAvatar = (photos) => {
-    debugger
-    return {type: SET_USER_AVATAR, photos }} 
+export const setAboutMe = (aboutMe) => {return {type:SET_NICKNAME, aboutMe}}
+export const setNickName = (nickName) => {return {type:SET_ABOUT_ME, nickName}}
+export const getAvatar = (photos) => {return {type: SET_USER_AVATAR, photos }} 
 export const getUsersProfile = (userId) => async (dispatch) => {
     dispatch(toggleIsFetching(true))
     let data = await getUserProfile(userId)
@@ -88,11 +96,18 @@ export const updateStatus = (status) => async (dispatch) => {
         dispatch(getStatus(status))
     }
 }
-
 export const saveAvatar = (avatar) => async (dispatch) => {
     let data = await saveUserAvatar(avatar)
     if(data.data.resultCode === 0) {
         dispatch(getAvatar(data.data.data.photos))
     }
+}
+export const uploadAboutMe = (profile, aboutMe) => async (dispatch) => {
+    let updatedProfile = {...profile, aboutMe: aboutMe}
+    let data = await saveNewProfile(updatedProfile)
+}
+export const uploadNickName = (profile, nickName) => async (dispatch) => {
+    let updatedProfile = {...profile, nickName: nickName}
+    let data = await saveNewProfile(updatedProfile)
 }
 export default profileReducer

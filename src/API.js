@@ -38,6 +38,11 @@ export const saveUserAvatar = (avatar) => {
     .put(`/profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
 }
 
+export const saveNewProfile = (profile) => {
+    return instance
+    .put(`/profile`, {...profile})
+}
+
 export const getLoginData = () => {
     return instance
     .get(`/auth/me`)

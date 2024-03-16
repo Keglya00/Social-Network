@@ -2,6 +2,7 @@ import styleProfileInfo from './ProfileInfo.module.css'
 import ProfileStatus from './ProfileStatus/ProfileStatus'
 import emptyAvatar from '../../../emptyAvatar.png'
 import addButton from '../../../images/addButton.jpg'
+import AboutMe from './AboutMe/AboutMe'
 
 const ProfileInfo = (props) => {
 
@@ -20,6 +21,9 @@ const ProfileInfo = (props) => {
         <ul className={styleProfileInfo.content__top_description}>
             <li>{props.nickName}</li>
             <li><ProfileStatus status={props.status} updateStatus={props.updateStatus}  /></li>
+            <li>
+                <AboutMe aboutMe={props.aboutMe} isOwner={props.isOwner} setUserAboutMe={props.setUserAboutMe} />
+            </li>
         </ul>
     </div> 
     )
