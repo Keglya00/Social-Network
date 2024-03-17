@@ -29,10 +29,13 @@ const MyPosts = (props) => {
 const AddNewPostForm = (props) => {
     return (
         <Form onSubmit={(formData) => {props.addPost(formData.newPostBody)}}>
-        {({ handleSubmit} ) => (
+        {({ handleSubmit, form} ) => (
         <form onSubmit={handleSubmit} className={styleMyPosts.MyPosts__addPost}>
             <Field validate={required} placeholder='Enter your post' component={'textarea'} name={'newPostBody'} className={styleMyPosts.MyPosts__addPost_textarea}></Field>
-            <button className={styleMyPosts.MyPosts__addPost_button}>
+            <button onClick={() => {
+                handleSubmit()
+                form.reset()
+            }} className={styleMyPosts.MyPosts__addPost_button}>
                 Add post
             </button>
         </form>

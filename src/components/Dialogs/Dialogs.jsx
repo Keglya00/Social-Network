@@ -34,10 +34,13 @@ const Dialogs = (props) => {
 const AddMessageForm = (props) => {
     return (
         <Form onSubmit={(formData) => {props.addMessage(formData.newMessageBody)}}>
-            {( { handleSubmit} ) => (
+            {( { handleSubmit, form} ) => (
                 <form onSubmit={handleSubmit} className={styleDialogs.dialogs__messages_addMessage}>
                     <Field validate={required} placeholder='Enter your message' component={'textarea'} name={'newMessageBody'} className={styleDialogs.dialogs__addMessages_textarea}></Field>
-                    <button className={styleDialogs.dialogs__addMessages_button}></button>
+                    <button onClick={() => {
+                        handleSubmit()
+                        form.reset()
+                    }} className={styleDialogs.dialogs__addMessages_button}></button>
                 </form>
             )}
         </Form>   
