@@ -25,7 +25,6 @@ const AboutMe = (props) => {
     }
 
     let onAboutMeChanged = (aboutMe) => {
-        console.log(aboutMe.currentTarget.value.length)
         if(aboutMe.currentTarget.value.length < 70) {
             setAboutme(aboutMe.currentTarget.value)
         }

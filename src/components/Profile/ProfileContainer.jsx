@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUsersProfile, updateStatus, saveAvatar, uploadAboutMe, setAboutMe, setNickName, uploadNickName } from './../../redux/profileReducer';
+import { getUsersProfile, updateStatus, saveAvatar, uploadAboutMe, setAboutMe } from './../../redux/profileReducer';
 import Profile from './Profile';
 import Preloader from "../Common/Preloader/Preloader";
 import withRouter from './../../withRouter';
@@ -22,11 +22,6 @@ class ProfileApiComponent extends React.PureComponent {
         if (prevProps.params.userId != this.props.params.userId){
             this.renderProfile()           
         }           
-    }
-
-    setUserNickName = (nickName) => {
-        this.props.setNickName(nickName)
-        this.props.uploadNickName(this.props.profile, nickName)     
     }
 
     setUserAboutMe = (aboutMe) => {
@@ -60,6 +55,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-const ProfileContainer = compose(connect(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setNickName, setAboutMe }), withAuthReirect, withRouter, uploadNickName )(ProfileApiComponent)
+const ProfileContainer = compose(connect(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
 
 export default ProfileContainer

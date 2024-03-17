@@ -38,7 +38,7 @@ export const saveUserAvatar = (avatar) => {
     .put(`/profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
 }
 
-export const saveNewProfile = (profile) => {
+export const saveAboutMe = (profile) => {
     return instance
     .put(`/profile`, {...profile})
 }
@@ -49,9 +49,9 @@ export const getLoginData = () => {
     .then(responce => responce.data)
 }
 
-export const login = (email, password, rememberMe) => {
+export const login = (email, password, rememberMe = false, captcha = null) => {
     return instance
-    .post(`auth/login`, {email, password, rememberMe})
+    .post(`auth/login`, {email, password, rememberMe, captcha})
     .then(responce => responce.data)
 }
 
@@ -59,6 +59,11 @@ export const logout = () => {
     return instance
     .delete(`auth/login`)
     .then(responce => responce.data)
+}
+
+export const getCaptchaUrl = () => {
+    return instance.
+    get(`security/get-captcha-url`)
 }
 
 export const onUserFollow = (userId) => {

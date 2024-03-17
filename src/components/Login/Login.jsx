@@ -10,7 +10,7 @@ import { Navigate } from 'react-router-dom'
 const Login = (props) => {
 
     const onSubmit = (formData) => {
-        props.loginThunkCreator(formData.login, formData.password, formData.rememberMe)
+        props.loginThunkCreator(formData.login, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if(props.isAuth) {
@@ -24,7 +24,7 @@ const Login = (props) => {
                     Log In
                 </div>
                 {props.errorMessage ? <div className={styleLogin.errorMessage}>{props.errorMessage}</div> : null }
-                <LoginForm onSubmit={onSubmit} />
+                <LoginForm onSubmit={onSubmit} captcha={props.captcha} />
             </div>
         </div>
     )
@@ -46,6 +46,16 @@ const LoginForm = (props) => {
                         <Field type={'checkbox'} name={'rememberMe'} component={'input'} /> 
                         <div>Remember me</div>
                     </div>
+                    <div className={styleLogin.login__captcha}>
+                        {props.captcha 
+                        ? <div>
+                            <img className={styleLogin.login__captcha_img} src={props.captcha} />
+                            <div>
+                                <Field className={styleLogin.login__captcha_input} validate={required} name={'captcha'} component={'input'} />
+                            </div>
+                        </div> 
+                        : null}
+                    </div>
                     <div className={styleLogin.login__button_container}>
                         <button className={styleLogin.login__button}>Log In</button>
                     </div>
@@ -60,7 +70,8 @@ let mapStateToProps = (state) => {
     return {
         isAuth: state.authReducer.isAuth,
         userId: state.authReducer.data ? state.authReducer.data.id : null,
-        errorMessage: state.authReducer.errorMessage
+        errorMessage: state.authReducer.errorMessage,
+        captcha: state.authReducer.captcha
     }
 }
 
