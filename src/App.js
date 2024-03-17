@@ -13,8 +13,13 @@ const UsersContainer = React.lazy(() => import('./components/Users/UsersContaine
 
 class App extends React.Component {
 
+  catchUnhandledErrors = () => {
+    alert('Some error occured')
+  }
+
   componentDidMount() {
-    this.props.initializeApp() 
+    this.props.initializeApp()
+    window.addEventListener('unhandledrejection', this.catchUnhandledErrors)
   }
 
   render() {
