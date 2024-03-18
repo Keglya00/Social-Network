@@ -4,8 +4,25 @@
     padding: 0 5px;
 }
 
+.pages__container{
+    display: flex;
+}
+
 .page{
     transition: .3s;
     padding: 0 5px;
+    cursor: pointer;
+}
+
+.button_next{
+    transform: rotate(180deg);
+    height: 25px;
+}
+
+.button_prev{
+    height: 25px;
+}
+
+.button{
     cursor: pointer;
 }
