@@ -7,7 +7,16 @@ const DELETE_USER_DATA ='auth/DELETE_USER_DATA'
 const STOP_SUBMIT = 'auth/STOP_SUBMIT'
 const SET_CAPTCHA = 'auth/SET_CAPTCHA'
 
-let initialState = {
+type InitialStateType = {
+    data: null | object,
+    userAvatar: null | string,
+    isAuth: boolean,
+    isFetching: boolean,
+    errorMessage: null | string,
+    captcha: string | null
+}
+
+let initialState: InitialStateType = {
     data: null,
     userAvatar: null,
     isAuth: false,
@@ -16,7 +25,7 @@ let initialState = {
     captcha: null
 }
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state: InitialStateType = initialState, action: any) => {
 
     switch(action.type){
         case SET_USER_DATA: {
@@ -61,18 +70,24 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setUserData = (data) => {return{type: SET_USER_DATA, data}}
-export const stopSubmit = (errorMessage) => {return {type: STOP_SUBMIT, errorMessage}}
-export const deleteUserData = () => {return{type: DELETE_USER_DATA}}
-export const toggleIsFetching = (isFetching) => {return{type: TOGGLE_IS_FETCHING, isFetching}}
-export const setUserAvatar = (avatar) => {return{type: SET_USER_AVATAR, avatar}}
-export const setCaptcha = (captcha) => {return{type: SET_CAPTCHA, captcha}}
-export const getLoginDataThunkCreator = () => async (dispatch) => {
+type SetUserDataType = {type: typeof SET_USER_DATA, data: object}
+export const setUserData = (data: object): SetUserDataType => {return{type: SET_USER_DATA, data}}
+type StopSubmitType = {type: typeof STOP_SUBMIT, errorMessage: string}
+export const stopSubmit = (errorMessage: string): StopSubmitType => {return {type: STOP_SUBMIT, errorMessage}}
+type DeteteUserDataType = {type: typeof DELETE_USER_DATA}
+export const deleteUserData = (): DeteteUserDataType => {return{type: DELETE_USER_DATA}}
+type ToggleIsFetchingType = {type: typeof TOGGLE_IS_FETCHING, isFetching: boolean}
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingType => {return{type: TOGGLE_IS_FETCHING, isFetching}}
+type SetUserAvatarType = {type: typeof SET_USER_AVATAR, avatar: string}
+export const setUserAvatar = (avatar: string): SetUserAvatarType => {return{type: SET_USER_AVATAR, avatar}}
+type SetCaptchaType = {type: typeof SET_CAPTCHA, captcha: string}
+export const setCaptcha = (captcha: string): SetCaptchaType  => {return{type: SET_CAPTCHA, captcha}}
+export const getLoginDataThunkCreator = () => async (dispatch: any) => {
     let data = await getLoginData()
     dispatch(setUserData(data.data))
     dispatch(toggleIsFetching(false))
 }
-export const loginThunkCreator = (email, password, rememberMe, captcha) => async (dispatch) => {
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
     let data = await login(email, password, rememberMe, captcha)
     if(data.resultCode === 0){
         dispatch(getLoginDataThunkCreator())
@@ -84,17 +99,17 @@ export const loginThunkCreator = (email, password, rememberMe, captcha) => async
     }
 }   
 
-export const logoutThunkCreator = () => async (dispatch) => {
+export const logoutThunkCreator = () => async (dispatch: any) => {
     let data = await logout()
     if(data.resultCode === 0){
         dispatch(deleteUserData())
     }
 }
-export const setUsersAvatarThunkCreator = (userId) => async (dispatch) => {
+export const setUsersAvatarThunkCreator = (userId: number) => async (dispatch: any) => {
     let data = await getUserProfile(userId)
     dispatch(setUserAvatar(data.photos.small))
 }
-export const getCaptcha = () => async (dispatch) => {
+export const getCaptcha = () => async (dispatch: any) => {
     let data = await getCaptchaUrl()
     dispatch(setCaptcha(data.data.url))
 }

@@ -49,7 +49,8 @@ export const getLoginData = () => {
     .then(responce => responce.data)
 }
 
-export const login = (email, password, rememberMe = false, captcha = null) => {
+export const login = (email, password, rememberMe = false, captcha) => {
+    debugger
     return instance
     .post(`auth/login`, {email, password, rememberMe, captcha})
     .then(responce => responce.data)
