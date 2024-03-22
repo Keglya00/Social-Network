@@ -1,4 +1,4 @@
-import { getCaptchaUrl, getLoginData, getUserProfile, login, logout } from "./../API"; 
+import { getCaptchaUrl, getLoginData, getUserProfile, login, logout } from "../API"; 
 
 const SET_USER_DATA = 'auth/SET_USER_DATA'
 const TOGGLE_IS_FETCHING = 'auth/TOGGLE_IS_FETCHING'

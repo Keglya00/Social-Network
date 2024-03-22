@@ -5,7 +5,7 @@ import NavbarContainer from './components/Navbar/NavbarContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginContainer from './components/Login/Login';
-import { initializeApp } from './redux/appReducer';
+import { initializeApp } from './redux/appReducer.ts';
 import { connect } from 'react-redux';
 import Preloader from './components/Common/Preloader/Preloader';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))

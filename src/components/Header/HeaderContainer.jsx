@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Header from "./Header";
 import React from "react";
-import { setUsersAvatarThunkCreator, logoutThunkCreator } from './../../redux/authReducer';
+import { setUsersAvatarThunkCreator, logoutThunkCreator } from './../../redux/authReducer.ts';
 
 
 class HeaderApiComponent extends React.PureComponent {

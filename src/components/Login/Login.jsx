@@ -4,7 +4,7 @@ import { Form, Field } from 'react-final-form'
 import { RequiredInput } from '../Common/FormControls/FormComponents'
 import { required } from '../../utilits/validators'
 import { connect } from 'react-redux'
-import { loginThunkCreator } from './../../redux/authReducer';
+import { loginThunkCreator } from './../../redux/authReducer.ts';
 import { Navigate } from 'react-router-dom'
 
 const Login = (props) => {
