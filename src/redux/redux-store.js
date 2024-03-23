@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux"
 import { composeWithDevTools } from "@redux-devtools/extension";
-import profileReducer from './profileReducer.js';
+import profileReducer from './profileReducer.ts';
 import dialogsReducer from './dialogsReducer.ts';
 import usersReducer from './usersReducer.js';
 import appReducer from './appReducer.ts'

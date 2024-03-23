@@ -6,13 +6,11 @@ type ChatType = {
     username: string,
     userid: string
 }
-
 type MessageType = {
     message: string,
     id: number,
     isMine: boolean,
 }
-
 let initialState = {
     chatsData: [
         {username:'Spirit', userid:'@Spirit'},
@@ -28,7 +26,7 @@ let initialState = {
     ] as Array<MessageType>
 }
 
-const dialogsReducer = (state: InitialStateType = initialState, action: any) => {
+const dialogsReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
 
     switch(action.type){
         case ADD_MESSAGE:{
