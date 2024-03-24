@@ -7,8 +7,14 @@ const DELETE_USER_DATA ='auth/DELETE_USER_DATA'
 const STOP_SUBMIT = 'auth/STOP_SUBMIT'
 const SET_CAPTCHA = 'auth/SET_CAPTCHA'
 
+export type DataType = {
+    email: string,
+    id: number,
+    login: string
+}
+
 type InitialStateType = {
-    data: null | object,
+    data: null | DataType,
     userAvatar: null | string,
     isAuth: boolean,
     isFetching: boolean,
@@ -70,8 +76,8 @@ const authReducer = (state: InitialStateType = initialState, action: any) => {
     }
 }
 
-type SetUserDataType = {type: typeof SET_USER_DATA, data: object}
-export const setUserData = (data: object): SetUserDataType => {return{type: SET_USER_DATA, data}}
+type SetUserDataType = {type: typeof SET_USER_DATA, data: DataType}
+export const setUserData = (data: DataType): SetUserDataType => {return{type: SET_USER_DATA, data}}
 type StopSubmitType = {type: typeof STOP_SUBMIT, errorMessage: string}
 export const stopSubmit = (errorMessage: string): StopSubmitType => {return {type: STOP_SUBMIT, errorMessage}}
 type DeteteUserDataType = {type: typeof DELETE_USER_DATA}

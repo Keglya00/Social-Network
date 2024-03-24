@@ -1,10 +1,14 @@
 import { NavLink } from 'react-router-dom'
 import navbarSlyle from './Navbar.module.css'
+import React from 'react'
 
 // Функция создает класс для активной ссылки
 
+type PropsType = {
+    userId: number
+}
 
-const Navbar = (props) => {
+const Navbar: React.FC<PropsType> = (props) => {
     return(
     <nav className={navbarSlyle.nav}>
         <ul className={navbarSlyle.nav__list}>
