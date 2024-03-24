@@ -1,7 +1,16 @@
 import { NavLink } from 'react-router-dom'
 import headerStyle from './Header.module.css'
+import React from 'react'
 
-const Header = (props) => {
+type PropsType = {
+    login: string,
+    userAvatar: string,
+    isAuth: boolean,
+    userAuthorized: () => void,
+    logout: () => void
+}
+
+const Header: React.FC<PropsType> = (props) => {
     return(
         <header className={headerStyle.header}>
             <div className={headerStyle.header__top}>

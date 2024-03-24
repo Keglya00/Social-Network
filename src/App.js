@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import HeaderContainer from './components/Header/HeaderContainer';
+import HeaderContainer from './components/Header/HeaderContainer.tsx';
 import NavbarContainer from './components/Navbar/NavbarContainer.tsx';
 import ProfileContainer from './components/Profile/ProfileContainer.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
