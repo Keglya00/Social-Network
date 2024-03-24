@@ -1,7 +1,15 @@
 import { NavLink } from 'react-router-dom'
 import styleUser from './User.module.css'
+import React from 'react'
 
- const User = (props) => {
+type PropsType = {
+    id: number,
+    name: string,
+    status: string | null,
+    avatar: string | null
+}
+
+ const User: React.FC<PropsType> = (props) => {
     return(
         <div className={styleUser.user}>
             <NavLink to={'/profile/' + props.id}>

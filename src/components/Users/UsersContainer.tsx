@@ -1,31 +1,51 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getUsersThunkCreator, unfollowThunkCreator, followThunkCreator, setCurrentPage } from "../../redux/usersReducer";
-import Users from './Users'
-import Preloader from "../Common/Preloader/Preloader";
-import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getPagesCount, getPortionSize, getPortionsCount, getUsersData } from "../../redux/usersSelectors";
+import { getUsersThunkCreator, unfollowThunkCreator, followThunkCreator, setCurrentPage, UsersDataType } from "../../redux/usersReducer.ts";
+import Users from './Users.tsx'
+import Preloader from "../Common/Preloader/Preloader.jsx";
+import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getPagesCount, getPortionSize, getPortionsCount, getUsersData } from "../../redux/usersSelectors.ts";
+import { RootStateType } from "../../redux/redux-store.ts";
 
-class UsersApiComponent extends React.PureComponent {
+type MapStateToPropsType = {
+    pagesCount: number,
+    pageSize: number,
+    currentPage: number,
+    usersData: Array<UsersDataType>,
+    isFetching: boolean,
+    followingInProgress: Array<number>,
+    portionsCount: number,
+    portionSize: number
+}
+
+type MapDispatchToPropsType = {
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void
+    setCurrentPage: (page: number) => void,
+    followThunkCreator: (userId: number) => void,
+    unfollowThunkCreator: (userId: number) => void
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+class UsersApiComponent extends React.PureComponent<PropsType> {
 
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     } 
 
-    onPageChanged = (page) => {
+    onPageChanged = (page: number) => {
         this.props.setCurrentPage(page)
         this.props.getUsersThunkCreator(page, this.props.pageSize)
     }
 
-    onUserFollow = (userId) => {
+    onUserFollow = (userId: number) => {
         this.props.followThunkCreator(userId)
     }
 
-    onUserUnfollow = (userId) => {
+    onUserUnfollow = (userId: number) => {
         this.props.unfollowThunkCreator(userId)
     }
 
     render() {
-        debugger
         return (
             <>
                 {this.props.isFetching ? <Preloader /> : null}
@@ -46,7 +66,7 @@ class UsersApiComponent extends React.PureComponent {
     }
 }
  
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
         usersData: getUsersData(state),
         pagesCount : getPagesCount(state),
@@ -59,6 +79,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, { getUsersThunkCreator, unfollowThunkCreator, followThunkCreator, setCurrentPage })(UsersApiComponent)
+const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {} , RootStateType>(mapStateToProps, { getUsersThunkCreator, unfollowThunkCreator, followThunkCreator, setCurrentPage })(UsersApiComponent)
 
 export default UsersContainer

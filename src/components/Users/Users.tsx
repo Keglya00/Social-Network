@@ -1,8 +1,23 @@
 import styleUsers from './Users.module.css'
-import User from "./User/User"
-import Paginator from '../Common/Paginator/Paginator'
+import User from "./User/User.tsx"
+import Paginator from '../Common/Paginator/Paginator.tsx'
+import React from 'react'
+import { UsersDataType } from '../../redux/usersReducer.ts'
 
-const Users = (props) => {
+type PropsType = {
+    pagesCount: number,
+    currentPage: number,
+    usersData: Array<UsersDataType>,
+    onUserFollow: (userId: number) => void,
+    onUserUnfollow: (userId: number) => void,
+    onPageChanged: (page: number) => void,
+    isFetching: boolean,
+    followingInProgress: Array<number>,
+    portionsCount: number,
+    portionSize: number
+}
+
+const Users: React.FC<PropsType> = (props) => {
     let usersElements = props.usersData.map(
             (user) => 
             <li className={styleUsers.users__item}>
@@ -21,9 +36,7 @@ const Users = (props) => {
                 {usersElements}
             </div>
             <div>
-                {/* <Paginator count={props.portionsCount}> */}
-                    <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged} portionSize={props.portionSize} portionsCount={props.portionsCount} pagesCount={props.pagesCount} />
-                {/* </Paginator> */}
+                <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged} portionSize={props.portionSize} portionsCount={props.portionsCount} pagesCount={props.pagesCount} />
             </div>
         </div>
     )

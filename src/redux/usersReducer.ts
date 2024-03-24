@@ -12,7 +12,7 @@ type PhotosType = {
     large: string,
     small: string
 }
-type UsersDataType = {
+export type UsersDataType = {
     id: number,
     name: string,
     status: string,

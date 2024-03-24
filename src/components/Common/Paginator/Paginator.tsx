@@ -1,9 +1,18 @@
 import stylePaginator from './Paginator.module.css'
 import arrow from '../../../images/arrow.svg'
 import { useState } from 'react'
+import React from 'react'
 
-const Paginator = (props) => {
-    let pages = []
+type PropsType = {
+    pagesCount: number,
+    portionSize: number,
+    portionsCount: number,
+    currentPage: number,
+    onPageChanged: (page: number) => void
+}
+
+const Paginator: React.FC<PropsType> = (props) => {
+    let pages: Array<number> = []
     for(let i=1; i <= props.pagesCount; i++){ 
         pages.push(i)
     }

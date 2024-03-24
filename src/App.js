@@ -9,7 +9,7 @@ import { initializeApp } from './redux/appReducer.ts';
 import { connect } from 'react-redux';
 import Preloader from './components/Common/Preloader/Preloader';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
-const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer.tsx'))
 
 class App extends React.Component {
 
