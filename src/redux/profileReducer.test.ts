@@ -1,16 +1,22 @@
 import profileReducer, { addPostActionCreator, deletePost } from "./profileReducer"
+import { ProfileType, PostType } from "./profileReducer"
 
 let initialState = {
     postsData: [
         {message:'How are you', id: 1, likes: 10},
         {message:'It is my first post', id: 2, likes: 22},
-        {message:'Ya lublu mefedron)', id: 3, likes: 228}
-    ]
+        {message:'Hello world', id: 3, likes: 228}
+    ] as Array<PostType> ,
+    profile: null as null | ProfileType, 
+    isFetching: false,
+    status: ''
 }
+
+type InitialStateType = typeof initialState
 
 it('new post should be added', () => {
     let action = addPostActionCreator('test message')
-    let state = initialState
+    let state: InitialStateType = initialState
     let newState = profileReducer(state, action)
     expect(newState.postsData.length).toBe(4)
 })

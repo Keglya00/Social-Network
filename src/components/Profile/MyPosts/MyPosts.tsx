@@ -1,15 +1,23 @@
 import React from 'react'
 import styleMyPosts from './MyPosts.module.css'
-import Post from './Posts/Post'
+import Post from './Posts/Post.tsx'
 import { Form, Field } from 'react-final-form'
 import { required } from '../../../utilits/validators'
+import { PostType } from '../../../redux/profileReducer'
 
+type PropsType = {
+    postsData: Array<PostType>,
+    addPost: (newPost: string) => void
+}
+type PropsFormType = {
+    addPost: (newPost: string) => void       
+}
 
-const MyPosts = (props) => {
+const MyPosts: React.FC<PropsType> = (props) => {
     
     let postsElements = props.postsData.map( (post) => <Post message={post.message} likes={post.likes} /> )
 
-    let onAddPostClick = (newPost) => {
+    let onAddPostClick = (newPost: string) => {
         props.addPost(newPost)
     }
 
@@ -26,7 +34,7 @@ const MyPosts = (props) => {
     )
 }
 
-const AddNewPostForm = (props) => {
+const AddNewPostForm: React.FC<PropsFormType> = (props) => {
     return (
         <Form onSubmit={(formData) => {props.addPost(formData.newPostBody)}}>
         {({ handleSubmit, form} ) => (

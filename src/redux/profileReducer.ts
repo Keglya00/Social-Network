@@ -8,7 +8,7 @@ const DELETE_POST = 'DELETE_POST'
 const SET_USER_AVATAR = 'SET_USER_AVATAR'
 const SET_ABOUT_ME = 'SET_ABOUT_ME'
 
-type PostType = {
+export type PostType = {
     message: string,
     id: number,
     likes: number
@@ -23,12 +23,13 @@ type ContactsType = {
     youtube: string,
     mainLink: string
 }
-type PhotosType = {
+export type PhotosType = {
     small: string | null,
     large: string | null
 }
-type ProfileType = {
+export type ProfileType = {
     userId: number,
+    aboutMe: string,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,

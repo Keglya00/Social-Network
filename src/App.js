@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import HeaderContainer from './components/Header/HeaderContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
+import ProfileContainer from './components/Profile/ProfileContainer.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginContainer from './components/Login/Login';
 import { initializeApp } from './redux/appReducer.ts';

@@ -1,6 +1,12 @@
 import stylePost from './Post.module.css'
+import React from 'react'
 
-const Post = (message) => {
+type PorpsType = {
+    message: string,
+    likes: number
+}
+
+const Post: React.FC<PorpsType> = (message) => {
     return(
         <div className={stylePost.post}>
             <div className={stylePost.post__title}>

@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react'
 import editButton from '../../../../images/editButton.png'
 import styleAboutMe from './AboutMe.module.css'
-import { Form, Field } from 'react-final-form'
 import checkButton from '../../../../images/checkmark.svg'
+import React from 'react'
 
-const AboutMe = (props) => {
+type PropsType = {
+    aboutMe: string,
+    isOwner: boolean,
+    setUserAboutMe: (aboutMe: string) => void
+}
+
+const AboutMe: React.FC<PropsType> = (props) => {
 
     const [editMode, setEditMode] = useState(false)
     const [aboutMe, setAboutme] = useState(props.aboutMe)
@@ -24,7 +30,7 @@ const AboutMe = (props) => {
         props.setUserAboutMe(aboutMe)
     }
 
-    let onAboutMeChanged = (aboutMe) => {
+    let onAboutMeChanged = (aboutMe: any) => {
         if(aboutMe.currentTarget.value.length < 70) {
             setAboutme(aboutMe.currentTarget.value)
         }

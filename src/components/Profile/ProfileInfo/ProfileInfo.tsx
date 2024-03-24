@@ -1,12 +1,25 @@
 import styleProfileInfo from './ProfileInfo.module.css'
-import ProfileStatus from './ProfileStatus/ProfileStatus'
+import ProfileStatus from './ProfileStatus/ProfileStatus.tsx'
 import emptyAvatar from '../../../emptyAvatar.png'
 import addButton from '../../../images/addButton.jpg'
-import AboutMe from './AboutMe/AboutMe'
+import AboutMe from './AboutMe/AboutMe.tsx'
+import React from 'react'
+import { PhotosType } from '../../../redux/profileReducer'
 
-const ProfileInfo = (props) => {
+type PropsType = {
+    photos: PhotosType,
+    aboutMe: string,
+    nickName: string,  
+    isOwner: boolean,
+    status: string,
+    setUserAboutMe: (aboutMe: string) => void,
+    saveAvatar: (avatar: any) => void,
+    updateStatus: (status: string) => void
+}
 
-    let onAvatarSelected = (value) => {
+const ProfileInfo: React.FC<PropsType> = (props) => {
+
+    let onAvatarSelected = (value: any) => {
         if(value.target.files.length) {
             props.saveAvatar(value.target.files[0])
         }
