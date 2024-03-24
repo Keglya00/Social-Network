@@ -1,5 +1,6 @@
 import requiredSign from './../../../requiredSign.png'
 import styleForm from './FormComponents.module.css'
+import React from 'react'
 
 export const RequiredInput = ({input, meta}) => {
     return (
