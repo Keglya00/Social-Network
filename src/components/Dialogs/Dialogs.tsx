@@ -4,7 +4,7 @@ import Chat from './Chat/Chat.tsx'
 import Message from './Message/Message.tsx'
 import MyMessage from './Message/MyMessage'
 import { Field, Form } from 'react-final-form'
-import { required } from '../../utilits/validators'
+import { required } from '../../utilits/validators.ts'
 import { ChatType, MessageType } from '../../redux/dialogsReducer'
 
 type PropsType = {

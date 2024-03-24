@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getUsersProfile, updateStatus, saveAvatar, uploadAboutMe, setAboutMe, ProfileType } from '../../redux/profileReducer.ts';
 import Profile from './Profile.tsx';
-import Preloader from "../Common/Preloader/Preloader.jsx";
+import Preloader from "../Common/Preloader/Preloader.tsx";
 import withRouter from '../../withRouter.js';
 import { withAuthReirect } from "../../hoc/withAuthRedirect.js";
 import { compose } from "redux";

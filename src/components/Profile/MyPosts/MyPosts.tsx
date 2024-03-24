@@ -2,7 +2,7 @@ import React from 'react'
 import styleMyPosts from './MyPosts.module.css'
 import Post from './Posts/Post.tsx'
 import { Form, Field } from 'react-final-form'
-import { required } from '../../../utilits/validators'
+import { required } from '../../../utilits/validators.ts'
 import { PostType } from '../../../redux/profileReducer'
 
 type PropsType = {

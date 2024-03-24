@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getUsersThunkCreator, unfollowThunkCreator, followThunkCreator, setCurrentPage, UsersDataType } from "../../redux/usersReducer.ts";
 import Users from './Users.tsx'
-import Preloader from "../Common/Preloader/Preloader.jsx";
+import Preloader from "../Common/Preloader/Preloader.tsx";
 import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getPagesCount, getPortionSize, getPortionsCount, getUsersData } from "../../redux/usersSelectors.ts";
 import { RootStateType } from "../../redux/redux-store.ts";
 

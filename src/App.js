@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginContainer from './components/Login/Login';
 import { initializeApp } from './redux/appReducer.ts';
 import { connect } from 'react-redux';
-import Preloader from './components/Common/Preloader/Preloader';
+import Preloader from './components/Common/Preloader/Preloader.tsx';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer.tsx'))
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer.tsx'))
 

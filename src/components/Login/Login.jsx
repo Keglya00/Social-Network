@@ -1,8 +1,8 @@
 import React from 'react'
 import styleLogin from './Login.module.css'
 import { Form, Field } from 'react-final-form'
-import { RequiredInput } from '../Common/FormControls/FormComponents'
-import { required } from '../../utilits/validators'
+import { RequiredInput } from '../Common/FormControls/FormComponents.tsx'
+import { required } from '../../utilits/validators.ts'
 import { connect } from 'react-redux'
 import { loginThunkCreator } from './../../redux/authReducer.ts';
 import { Navigate } from 'react-router-dom'
