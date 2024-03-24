@@ -2,11 +2,11 @@ const ADD_MESSAGE = 'ADD-MESSAGE'
 
 type InitialStateType = typeof initialState
 
-type ChatType = {
+export type ChatType = {
     username: string,
     userid: string
 }
-type MessageType = {
+export type MessageType = {
     message: string,
     id: number,
     isMine: boolean,

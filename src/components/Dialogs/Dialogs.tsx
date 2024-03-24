@@ -1,14 +1,25 @@
 import React from 'react'
 import styleDialogs from './Dialogs.module.css'
-import Chat from './Chat/Chat'
-import Message from './Message/Message'
+import Chat from './Chat/Chat.tsx'
+import Message from './Message/Message.tsx'
 import MyMessage from './Message/MyMessage'
 import { Field, Form } from 'react-final-form'
 import { required } from '../../utilits/validators'
+import { ChatType, MessageType } from '../../redux/dialogsReducer'
 
-const Dialogs = (props) => {
+type PropsType = {
+    chatsData: Array<ChatType>,
+    messagesData: Array<MessageType>,
+    addMessage: (newMessage: string) => void
+}
 
-    let onAddMessageClick = (newMessage) => {
+type AddMessageFormPropsType = {
+    addMessage: (message: string) => void
+}
+
+const Dialogs: React.FC<PropsType> = (props) => {
+
+    let onAddMessageClick = (newMessage: string) => {
         props.addMessage(newMessage)
     }
 
@@ -31,7 +42,7 @@ const Dialogs = (props) => {
     )
 }
 
-const AddMessageForm = (props) => {
+const AddMessageForm: React.FC<AddMessageFormPropsType> = (props) => {
     return (
         <Form onSubmit={(formData) => {props.addMessage(formData.newMessageBody)}}>
             {( { handleSubmit, form} ) => (
