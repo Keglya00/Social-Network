@@ -26,7 +26,7 @@ let initialState = {
     ] as Array<MessageType>
 }
 
-const dialogsReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
 
     switch(action.type){
         case ADD_MESSAGE:{
@@ -41,6 +41,8 @@ const dialogsReducer = (state: InitialStateType = initialState, action: any): In
     }
 
 }
+
+type ActionType = AddMessageActionCreatorType
 
 type AddMessageActionCreatorType = {type: typeof ADD_MESSAGE, newMessage: string}
 export const addMessageActionCreator = (newMessage: string): AddMessageActionCreatorType => {return {type: ADD_MESSAGE, newMessage}}

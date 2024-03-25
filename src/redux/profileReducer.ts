@@ -1,4 +1,6 @@
 import {getUserProfile, getUserStatus, saveAboutMe, saveUserAvatar, updateUserStatus} from '../API'
+import { ThunkAction } from 'redux-thunk';
+import { RootStateType } from './redux-store';
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE '
@@ -50,7 +52,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 
-const profileReducer = (state: InitialStateType = initialState, action: any) => {
+const profileReducer = (state: InitialStateType = initialState, action: ActionType) => {
 
     switch(action.type){
         case ADD_POST: {
@@ -101,6 +103,9 @@ const profileReducer = (state: InitialStateType = initialState, action: any) => 
     }
 }
 
+type ActionType = AddPostActionCreatorType | DeletePostType | SetUserProfileType | ToggleIsFetchingType | GetStatusType | SetAboutMeType | GetAvatarType
+type ThunkType = ThunkAction<Promise<void>, RootStateType, unknown, ActionType>
+
 type AddPostActionCreatorType = {type: typeof ADD_POST, newPost: string}
 export const addPostActionCreator = (newPost: string): AddPostActionCreatorType => {return {type: ADD_POST, newPost}}
 type DeletePostType = {type: typeof DELETE_POST, postId: number}
@@ -115,7 +120,8 @@ type SetAboutMeType = {type: typeof SET_ABOUT_ME, aboutMe: string}
 export const setAboutMe = (aboutMe: string): SetAboutMeType => {return {type:SET_ABOUT_ME, aboutMe}}
 type GetAvatarType = {type: typeof SET_USER_AVATAR, photos: PhotosType}
 export const getAvatar = (photos: PhotosType): GetAvatarType => {return {type: SET_USER_AVATAR, photos }}
-export const getUsersProfile = (userId: number) => async (dispatch: any) => {
+
+export const getUsersProfile = (userId: number): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetching(true))
     let data = await getUserProfile(userId)
     dispatch(setUserProfile(data))
@@ -123,20 +129,20 @@ export const getUsersProfile = (userId: number) => async (dispatch: any) => {
     data = await getUserStatus(userId)
     dispatch(getStatus(data))
 }
-export const updateStatus = (status: string) => async (dispatch: any) => {
+export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     let data = await updateUserStatus(status)
     if(data.data.resultCode === 0) {
         dispatch(getStatus(status))
     }
 }
-export const saveAvatar = (avatar: any) => async (dispatch: any) => {
+export const saveAvatar = (avatar: any): ThunkType => async (dispatch) => {
     let data = await saveUserAvatar(avatar)
     if(data.data.resultCode === 0) {
         dispatch(getAvatar(data.data.data.photos))
     }
 }
 
-export const uploadAboutMe = (profile: ProfileType, aboutMe: string) => async (dispatch: any) => {
+export const uploadAboutMe = (profile: ProfileType, aboutMe: string): ThunkType => async (dispatch) => {
     let updatedProfile = {...profile, aboutMe: aboutMe}
     let data = await saveAboutMe(updatedProfile)
 }

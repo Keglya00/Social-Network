@@ -1,4 +1,6 @@
+import { ThunkAction } from "redux-thunk";
 import { getCaptchaUrl, getLoginData, getUserProfile, login, logout } from "../API"; 
+import { RootStateType } from "./redux-store";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA'
 const TOGGLE_IS_FETCHING = 'auth/TOGGLE_IS_FETCHING'
@@ -31,7 +33,7 @@ let initialState: InitialStateType = {
     captcha: null
 }
 
-const authReducer = (state: InitialStateType = initialState, action: any) => {
+const authReducer = (state: InitialStateType = initialState, action: ActionType) => {
 
     switch(action.type){
         case SET_USER_DATA: {
@@ -76,6 +78,9 @@ const authReducer = (state: InitialStateType = initialState, action: any) => {
     }
 }
 
+type ActionType = SetUserDataType | StopSubmitType | DeteteUserDataType | ToggleIsFetchingType | SetUserAvatarType | SetCaptchaType
+type ThunkType = ThunkAction<Promise<void>, RootStateType, unknown, ActionType>
+
 type SetUserDataType = {type: typeof SET_USER_DATA, data: DataType}
 export const setUserData = (data: DataType): SetUserDataType => {return{type: SET_USER_DATA, data}}
 type StopSubmitType = {type: typeof STOP_SUBMIT, errorMessage: string}
@@ -88,12 +93,13 @@ type SetUserAvatarType = {type: typeof SET_USER_AVATAR, avatar: string}
 export const setUserAvatar = (avatar: string): SetUserAvatarType => {return{type: SET_USER_AVATAR, avatar}}
 type SetCaptchaType = {type: typeof SET_CAPTCHA, captcha: string}
 export const setCaptcha = (captcha: string): SetCaptchaType  => {return{type: SET_CAPTCHA, captcha}}
-export const getLoginDataThunkCreator = () => async (dispatch: any) => {
+
+export const getLoginDataThunkCreator = (): ThunkType => async (dispatch) => {
     let data = await getLoginData()
     dispatch(setUserData(data.data))
     dispatch(toggleIsFetching(false))
 }
-export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => async (dispatch) => {
     let data = await login(email, password, rememberMe, captcha)
     if(data.resultCode === 0){
         dispatch(getLoginDataThunkCreator())
@@ -104,18 +110,17 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
         dispatch(stopSubmit(data.messages[0]))
     }
 }   
-
-export const logoutThunkCreator = () => async (dispatch: any) => {
+export const logoutThunkCreator = (): ThunkType => async (dispatch) => {
     let data = await logout()
     if(data.resultCode === 0){
         dispatch(deleteUserData())
     }
 }
-export const setUsersAvatarThunkCreator = (userId: number) => async (dispatch: any) => {
+export const setUsersAvatarThunkCreator = (userId: number): ThunkType => async (dispatch) => {
     let data = await getUserProfile(userId)
     dispatch(setUserAvatar(data.photos.small))
 }
-export const getCaptcha = () => async (dispatch: any) => {
+export const getCaptcha = (): ThunkType => async (dispatch) => {
     let data = await getCaptchaUrl()
     dispatch(setCaptcha(data.data.url))
 }
