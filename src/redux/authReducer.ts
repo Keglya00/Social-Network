@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk";
-import { getCaptchaUrl, getLoginData, getUserProfile, login, logout } from "../API"; 
+import { getCaptchaUrl, getLoginData, getUserProfile, login, logout } from "../API.ts"; 
 import { RootStateType } from "./redux-store";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA'

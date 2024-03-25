@@ -1,4 +1,4 @@
-import {getUserProfile, getUserStatus, saveAboutMe, saveUserAvatar, updateUserStatus} from '../API'
+import {getUserProfile, getUserStatus, saveAboutMe, saveUserAvatar, updateUserStatus} from '../API.ts'
 import { ThunkAction } from 'redux-thunk';
 import { RootStateType } from './redux-store';
 
@@ -26,8 +26,8 @@ type ContactsType = {
     mainLink: string
 }
 export type PhotosType = {
-    small: string | null,
-    large: string | null
+    small: string,
+    large: string
 }
 export type ProfileType = {
     userId: number,
@@ -126,8 +126,8 @@ export const getUsersProfile = (userId: number): ThunkType => async (dispatch) =
     let data = await getUserProfile(userId)
     dispatch(setUserProfile(data))
     dispatch(toggleIsFetching(false)) 
-    data = await getUserStatus(userId)
-    dispatch(getStatus(data))
+    let status = await getUserStatus(userId)
+    dispatch(getStatus(status))
 }
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     let data = await updateUserStatus(status)

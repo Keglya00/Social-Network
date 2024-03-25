@@ -1,4 +1,4 @@
-import {getUsers, onUserFollow, onUserUnfollow} from '../API'
+import {getUsers, onUserFollow, onUserUnfollow} from '../API.ts'
 import { ThunkAction } from 'redux-thunk'
 import { RootStateType } from './redux-store'
 import { Dispatch } from 'redux'
