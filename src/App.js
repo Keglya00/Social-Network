@@ -4,7 +4,7 @@ import HeaderContainer from './components/Header/HeaderContainer.tsx';
 import NavbarContainer from './components/Navbar/NavbarContainer.tsx';
 import ProfileContainer from './components/Profile/ProfileContainer.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginContainer from './components/Login/Login';
+import LoginContainer from './components/Login/Login.tsx';
 import { initializeApp } from './redux/appReducer.ts';
 import { connect } from 'react-redux';
 import Preloader from './components/Common/Preloader/Preloader.tsx';

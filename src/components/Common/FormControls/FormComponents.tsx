@@ -3,6 +3,7 @@ import styleForm from './FormComponents.module.css'
 import React from 'react'
 
 export const RequiredInput = ({input, meta}) => {
+    debugger
     return (
         <div className={styleForm.required}>
                 <input {...input} placeholder={input.name} type={input.name} className={meta.error && meta.touched ? styleForm.required__input_error : styleForm.required__input} />

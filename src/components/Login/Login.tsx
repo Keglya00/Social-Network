@@ -4,12 +4,31 @@ import { Form, Field } from 'react-final-form'
 import { RequiredInput } from '../Common/FormControls/FormComponents.tsx'
 import { required } from '../../utilits/validators.ts'
 import { connect } from 'react-redux'
-import { loginThunkCreator } from './../../redux/authReducer.ts';
+import { loginThunkCreator } from '../../redux/authReducer.ts';
 import { Navigate } from 'react-router-dom'
+import { RootStateType } from '../../redux/redux-store.ts'
 
-const Login = (props) => {
+type MapStateToPropsType = {
+    isAuth: boolean,
+    userId: number | null,
+    errorMessage: string | null,
+    captcha: string | null
+}
+type MapDispatchToPropsType = {
+    loginThunkCreator: (login: string, password: string, rememberMe: boolean, captcha: string) => void
+}
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-    const onSubmit = (formData) => {
+type FormDataType = {
+    login: string,
+    password: string,
+    rememberMe: boolean,
+    captcha: string
+}
+
+const Login: React.FC<PropsType> = (props) => {
+
+    const onSubmit = (formData: FormDataType) => {
         props.loginThunkCreator(formData.login, formData.password, formData.rememberMe, formData.captcha)
     }
 
@@ -30,9 +49,14 @@ const Login = (props) => {
     )
 }
 
-const LoginForm = (props) => {
+type LoginFormPropsType = {
+    onSubmit: (formData:  FormDataType) => void,
+    captcha: string | null
+}
+
+const LoginForm: React.FC<LoginFormPropsType> = (props) => {
     return (
-        <Form onSubmit={formData => props.onSubmit(formData)}>
+        <Form onSubmit={(formData: FormDataType) => props.onSubmit(formData)}>
             {( { handleSubmit} ) => (
             <form className={styleLogin.login__form} onSubmit={handleSubmit}>
                 <div>
@@ -66,7 +90,7 @@ const LoginForm = (props) => {
     )
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootStateType) => {
     return {
         isAuth: state.authReducer.isAuth,
         userId: state.authReducer.data ? state.authReducer.data.id : null,
@@ -75,6 +99,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-let LoginContainer = connect(mapStateToProps, { loginThunkCreator })(Login)
+let LoginContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, { loginThunkCreator })(Login)
 
 export default LoginContainer
