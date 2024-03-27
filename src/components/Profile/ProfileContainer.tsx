@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 import { getUsersProfile, updateStatus, saveAvatar, uploadAboutMe, setAboutMe, ProfileType } from '../../redux/profileReducer.ts';
 import Profile from './Profile.tsx';
 import Preloader from "../Common/Preloader/Preloader.tsx";
-import withRouter from '../../withRouter.js';
+import withRouter from '../../hoc/withRouter.tsx';
 import { withAuthReirect } from "../../hoc/withAuthRedirect.js";
 import { compose } from "redux";
 import { RootStateType } from "../../redux/redux-store.ts";
 
 type OwnPropsType = {
-    params: any
+    params: {
+        userId: string
+    }
 }
 
 type MapStateToPropsType = {
@@ -30,10 +32,9 @@ type MapDispatchToPropsType = {
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
 
 class ProfileApiComponent extends React.PureComponent<PropsType> {
-
     renderProfile = () => {
         let userId = this.props.params.userId
-        this.props.getUsersProfile(userId)
+        this.props.getUsersProfile(Number(userId))
     }
 
     componentDidMount() {
@@ -52,13 +53,14 @@ class ProfileApiComponent extends React.PureComponent<PropsType> {
     }
 
     render() {
+        debugger
         return (
             <>
                 {this.props.isFetching ? <Preloader /> : null}
-                {this.props.profile ? <Profile 
+                {this.props.profile.userId ? <Profile 
                 profile={this.props.profile} 
                 saveAvatar={this.props.saveAvatar} 
-                isOwner={this.props.params.userId == this.props.ownerId} 
+                isOwner={this.props.params.userId === this.props.ownerId.toString()} 
                 status={this.props.status} 
                 updateStatus={this.props.updateStatus}
                 setUserAboutMe={this.setUserAboutMe}
@@ -77,6 +79,6 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     }
 }
 
-const ProfileContainer = compose(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
+const ProfileContainer = compose(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter<PropsType> )(ProfileApiComponent)
 
 export default ProfileContainer

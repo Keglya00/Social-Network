@@ -16,8 +16,8 @@ export type DataType = {
 }
 
 type InitialStateType = {
-    data: null | DataType,
-    userAvatar: null | string,
+    data:DataType,
+    userAvatar: string,
     isAuth: boolean,
     isFetching: boolean,
     errorMessage: null | string,
@@ -25,8 +25,8 @@ type InitialStateType = {
 }
 
 let initialState: InitialStateType = {
-    data: null,
-    userAvatar: null,
+    data: {} as DataType,
+    userAvatar: '',
     isAuth: false,
     isFetching: false,
     errorMessage: null,
