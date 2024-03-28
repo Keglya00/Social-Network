@@ -4,7 +4,7 @@ import { getUsersProfile, updateStatus, saveAvatar, uploadAboutMe, setAboutMe, P
 import Profile from './Profile.tsx';
 import Preloader from "../Common/Preloader/Preloader.tsx";
 import withRouter from '../../hoc/withRouter.tsx';
-import { withAuthReirect } from "../../hoc/withAuthRedirect.js";
+import { withAuthReirect } from "../../hoc/withAuthRedirect.tsx";
 import { compose } from "redux";
 import { RootStateType } from "../../redux/redux-store.ts";
 
@@ -42,7 +42,7 @@ class ProfileApiComponent extends React.PureComponent<PropsType> {
     }
 
     componentDidUpdate(prevProps: PropsType) {
-        if (prevProps.params.userId != this.props.params.userId){
+        if (prevProps.params.userId !== this.props.params.userId){
             this.renderProfile()           
         }           
     }
@@ -79,6 +79,6 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     }
 }
 
-const ProfileContainer = compose(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter<PropsType> )(ProfileApiComponent)
+const ProfileContainer = compose(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
 
 export default ProfileContainer

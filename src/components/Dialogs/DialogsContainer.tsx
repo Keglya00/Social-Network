@@ -2,7 +2,7 @@ import React from 'react'
 import { ChatType, MessageType, addMessageActionCreator} from '../../redux/dialogsReducer.ts'
 import { MapDispatchToProps, connect } from 'react-redux'
 import Dialogs from './Dialogs.tsx'
-import { withAuthReirect } from '../../hoc/withAuthRedirect.js'
+import { withAuthReirect } from '../../hoc/withAuthRedirect.tsx'
 import { compose } from 'redux'
 import { RootStateType } from '../../redux/redux-store.ts'
 
