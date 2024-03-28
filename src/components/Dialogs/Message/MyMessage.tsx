@@ -1,6 +1,11 @@
 import styleMessage from './Message.module.css'
+import React from 'react'
 
-const MyMessage = (messagesData) => {
+type PropsType = {
+    message: string
+}
+
+const MyMessage: React.FC<PropsType> = (messagesData) => {
     return(
         <div  className={styleMessage.mymessage__inner}>
             {messagesData.message}
