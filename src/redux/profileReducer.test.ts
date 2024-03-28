@@ -7,7 +7,7 @@ let initialState = {
         {message:'It is my first post', id: 2, likes: 22},
         {message:'Hello world', id: 3, likes: 228}
     ] as Array<PostType> ,
-    profile: null as null | ProfileType, 
+    profile: {} as ProfileType, 
     isFetching: false,
     status: ''
 }
