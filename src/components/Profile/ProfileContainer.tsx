@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ComponentType } from "react";
 import { connect } from "react-redux";
 import { getUsersProfile, updateStatus, saveAvatar, uploadAboutMe, setAboutMe, ProfileType } from '../../redux/profileReducer.ts';
 import Profile from './Profile.tsx';
@@ -79,6 +79,6 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     }
 }
 
-const ProfileContainer = compose(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
+const ProfileContainer = compose<ComponentType>(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
 
 export default ProfileContainer

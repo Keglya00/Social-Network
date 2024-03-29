@@ -8,12 +8,21 @@ import LoginContainer from './components/Login/Login.tsx';
 import { initializeApp } from './redux/appReducer.ts';
 import { connect } from 'react-redux';
 import Preloader from './components/Common/Preloader/Preloader.tsx';
+import { RootStateType } from './redux/redux-store.ts';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer.tsx'))
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer.tsx'))
 
-class App extends React.Component {
+type MapStateToPropsType = {
+  initialized: boolean
+}
+type MapDispatchToPropsType = {
+  initializeApp: () => void
+}
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-  catchUnhandledErrors = () => {
+class App extends React.Component<PropsType> {
+
+  catchUnhandledErrors = (e: PromiseRejectionEvent) => {
     alert('Some error occured')
   }
 
@@ -50,7 +59,7 @@ class App extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootStateType) => {
   return{
     initialized: state.appReducer.initialized
   }

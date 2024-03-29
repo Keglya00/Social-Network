@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentType } from 'react'
 import { ChatType, MessageType, addMessageActionCreator} from '../../redux/dialogsReducer.ts'
 import { MapDispatchToProps, connect } from 'react-redux'
 import Dialogs from './Dialogs.tsx'
@@ -30,6 +30,6 @@ let mapDispatchToProps = (dispatch: any): MapDispatchToPropsType => {
     }
 }
 
-const DialogsContainer = compose(connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, mapDispatchToProps), withAuthReirect )(Dialogs)
+const DialogsContainer = compose<ComponentType>(connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, mapDispatchToProps), withAuthReirect )(Dialogs)
 
 export default DialogsContainer
