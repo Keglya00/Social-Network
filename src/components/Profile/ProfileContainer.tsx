@@ -79,6 +79,6 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     }
 }
 
-const ProfileContainer = compose<ComponentType>(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
+const ProfileContainer = compose<ComponentType >(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
 
 export default ProfileContainer

@@ -3,6 +3,7 @@ import User from "./User/User.tsx"
 import Paginator from '../Common/Paginator/Paginator.tsx'
 import React from 'react'
 import { UsersDataType } from '../../redux/usersReducer.ts'
+import { Field, Form, Formik } from 'formik'
 
 type PropsType = {
     pagesCount: number,
@@ -11,6 +12,7 @@ type PropsType = {
     onUserFollow: (userId: number) => void,
     onUserUnfollow: (userId: number) => void,
     onPageChanged: (page: number) => void,
+    onTermChanged: (term: string) => void,
     isFetching: boolean,
     followingInProgress: Array<number>,
     portionsCount: number,
@@ -32,6 +34,9 @@ const Users: React.FC<PropsType> = (props) => {
 
     return(
         <div>
+            <div>
+                <UserSearchForm onTermChanged={props.onTermChanged}/>
+            </div>
             <div className={styleUsers.users}>
                 {usersElements}
             </div>
@@ -39,6 +44,34 @@ const Users: React.FC<PropsType> = (props) => {
                 <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged} portionSize={props.portionSize} portionsCount={props.portionsCount} pagesCount={props.pagesCount} />
             </div>
         </div>
+    )
+}
+
+type FormPropsType = {
+    onTermChanged: (term: string) => void
+}
+
+const UserSearchForm: React.FC<FormPropsType> = (porps) => {
+
+    type FormValuesType = {term: string}
+    const submit = (values: FormValuesType, {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}) => {
+        porps.onTermChanged(values.term)
+        setSubmitting(false)
+    }
+
+    return (
+    <div>
+        <Formik
+        initialValues={{term: ''}}
+        onSubmit={submit}>
+        {({isSubmitting}) => (
+            <Form>
+                <Field type='text' name='term' />
+                <button type='submit' disabled={isSubmitting}>find</button>
+            </Form>
+        )}
+        </Formik>
+    </div>
     )
 }
 

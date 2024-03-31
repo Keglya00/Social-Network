@@ -13,11 +13,12 @@ const instance = axios.create({
 type GetUsersType = {
     items: Array<UsersDataType>
     totalCount: number,
-    error: string
+    error: string,
+    term: string
 }
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const getUsers = (currentPage: number, pageSize: number, term: string) => {
     return instance
-    .get<GetUsersType>(`/users?page=${currentPage}&count=${pageSize}`)
+    .get<GetUsersType>(`/users?page=${currentPage}&count=${pageSize}&term=${term}`)
     .then(responce => responce.data)
 }
 
@@ -109,7 +110,7 @@ export const getCaptchaUrl = () => {
     get<GetCaptchaUrlType>(`security/get-captcha-url`)
 }
 
-type OnUserFollowType = {
+export type OnUserFollowType = {
     data: {},
     messages: Array<string>,
     resultCode: number    
@@ -120,7 +121,7 @@ export const onUserFollow = (userId: number) => {
     .then(responce => responce.data)
 }
 
-type OnUserUnfollowType = {
+export type OnUserUnfollowType = {
     data: {},
     messages: Array<string>,
     resultCode: number 

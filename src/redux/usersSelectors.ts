@@ -36,3 +36,7 @@ export const getIsFetching = (state: RootStateType) => {
 export const getFollowingInProgress = (state: RootStateType) => {
     return state.usersReducer.followingInProgress
 }
+
+export const getTerm = (state: RootStateType) => {
+    return state.usersReducer.term
+}
