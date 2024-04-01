@@ -10,15 +10,13 @@ type MapStateToPropsType = {
 
 type PropsType = MapStateToPropsType 
 
-class NavbarApiComponent extends React.PureComponent<PropsType> {
+const NavbarApiComponent: React.FC<PropsType> = (props) => {
+    return(
+        <>
+            {props.data && <Navbar userId={props.data.id} />}
+        </>
+    )
 
-    render(){
-        return(
-            <>
-                {this.props.data && <Navbar userId={this.props.data.id} />}
-            </>
-        )
-    }
 }
 
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
@@ -29,4 +27,4 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
 
 const NavbarContainer = connect<MapStateToPropsType, {}, {}, RootStateType>(mapStateToProps, {})(NavbarApiComponent)
 
-export default NavbarContainer
+export default React.memo(NavbarContainer)

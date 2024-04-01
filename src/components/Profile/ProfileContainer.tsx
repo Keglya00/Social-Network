@@ -1,4 +1,4 @@
-import React, { ComponentType } from "react";
+import React, { ComponentType, useEffect } from "react";
 import { connect } from "react-redux";
 import { getUsersProfile, updateStatus, saveAvatar, uploadAboutMe, setAboutMe, ProfileType } from '../../redux/profileReducer.ts';
 import Profile from './Profile.tsx';
@@ -31,44 +31,40 @@ type MapDispatchToPropsType = {
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
 
-class ProfileApiComponent extends React.PureComponent<PropsType> {
-    renderProfile = () => {
-        let userId = this.props.params.userId
-        this.props.getUsersProfile(Number(userId))
+const ProfileApiComponent: React.FC<PropsType> = (props) => {
+    let renderProfile = () => {
+        let userId = props.params.userId
+        props.getUsersProfile(Number(userId))
     }
 
-    componentDidMount() {
-        this.renderProfile()
+    useEffect(() => {
+        renderProfile()
+    }, [])
+
+    useEffect(() => {
+        renderProfile()
+    }, [props.params.userId])
+
+    let setUserAboutMe = (aboutMe: string) => {
+        props.setAboutMe(aboutMe)
+        props.uploadAboutMe(props.profile, aboutMe)
     }
 
-    componentDidUpdate(prevProps: PropsType) {
-        if (prevProps.params.userId !== this.props.params.userId){
-            this.renderProfile()           
-        }           
-    }
-
-    setUserAboutMe = (aboutMe: string) => {
-        this.props.setAboutMe(aboutMe)
-        this.props.uploadAboutMe(this.props.profile, aboutMe)
-    }
-
-    render() {
-        debugger
-        return (
-            <>
-                {this.props.isFetching ? <Preloader /> : null}
-                {this.props.profile.userId ? <Profile 
-                profile={this.props.profile} 
-                saveAvatar={this.props.saveAvatar} 
-                isOwner={this.props.params.userId === this.props.ownerId.toString()} 
-                status={this.props.status} 
-                updateStatus={this.props.updateStatus}
-                setUserAboutMe={this.setUserAboutMe}
-                /> : null }
-            </>
-        )
-    }
+    return (
+        <>
+            {props.isFetching ? <Preloader /> : null}
+            {props.profile.userId ? <Profile 
+            profile={props.profile} 
+            saveAvatar={props.saveAvatar} 
+            isOwner={props.params.userId === props.ownerId.toString()} 
+            status={props.status} 
+            updateStatus={props.updateStatus}
+            setUserAboutMe={setUserAboutMe}
+            /> : null }
+        </>
+    )
 }
+
 
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
@@ -81,4 +77,4 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
 
 const ProfileContainer = compose<ComponentType >(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
 
-export default ProfileContainer
+export default React.memo(ProfileContainer)

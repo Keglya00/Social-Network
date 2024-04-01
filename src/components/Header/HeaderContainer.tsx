@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Header from "./Header.tsx";
-import React from "react";
+import React, { useEffect } from "react";
 import { setUsersAvatarThunkCreator, logoutThunkCreator, DataType } from '../../redux/authReducer.ts';
 import { ProfileType } from "../../redux/profileReducer.ts";
 import { RootStateType } from "../../redux/redux-store.ts";
@@ -20,29 +20,27 @@ type MapDispatchToPropsType = {
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class HeaderApiComponent extends React.PureComponent<PropsType> {
+const HeaderApiComponent: React.FC<PropsType> = (props) => {
 
-    componentDidMount(){
-        this.userAuthorized()       
+    useEffect(() => {
+        userAuthorized()
+    }, [])
+
+    useEffect(() => {
+        userAuthorized()
+    }, [props.profile])
+
+    let userAuthorized = () => {
+        props.setUsersAvatarThunkCreator(props.userAuthData.id)
     }
 
-    componentDidUpdate(prevProps: PropsType) {
-        if(this.props.profile != prevProps.profile){
-            this.userAuthorized()
-        }        
-    }
 
-    userAuthorized = () => {
-        this.props.setUsersAvatarThunkCreator(this.props.userAuthData.id)
-    }
+    return (
+         <>
+            <Header logout={props.logoutThunkCreator} login={props.userAuthData.login} userAvatar={props.userAvatar} isAuth={props.isAuth} userAuthorized={userAuthorized} /> 
+        </>
+    )
 
-    render() {
-        return (
-            <>
-                <Header logout={this.props.logoutThunkCreator} login={this.props.userAuthData.login} userAvatar={this.props.userAvatar} isAuth={this.props.isAuth} userAuthorized={this.userAuthorized} /> 
-            </>
-        )
-    }
 }
 
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => {

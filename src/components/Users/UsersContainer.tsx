@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getUsersThunkCreator, unfollowThunkCreator, followThunkCreator, setCurrentPage, UsersDataType, setTerm } from "../../redux/usersReducer.ts";
 import Users from './Users.tsx'
@@ -28,52 +28,51 @@ type MapDispatchToPropsType = {
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class UsersApiComponent extends React.PureComponent<PropsType> {
+const UsersApiComponent: React.FC<PropsType> = (props) => {
 
-    componentDidMount() {
-        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize, this.props.term)
-    } 
+    useEffect(() => {
+        props.getUsersThunkCreator(props.currentPage, props.pageSize, props.term)
+    }, [])
 
-    onPageChanged = (page: number) => {
-        this.props.setCurrentPage(page)
-        this.props.getUsersThunkCreator(page, this.props.pageSize, this.props.term)
+    let onPageChanged = (page: number) => {
+        props.setCurrentPage(page)
+        props.getUsersThunkCreator(page, props.pageSize, props.term)
     }
 
-    onUserFollow = (userId: number) => {
-        this.props.followThunkCreator(userId)
+    let onUserFollow = (userId: number) => {
+        props.followThunkCreator(userId)
     }
 
-    onUserUnfollow = (userId: number) => {
-        this.props.unfollowThunkCreator(userId)
+    let onUserUnfollow = (userId: number) => {
+        props.unfollowThunkCreator(userId)
     }
 
-    onTermChanged = (term: string) => {
-        this.props.setTerm(term)
-        this.props.setCurrentPage(1)
-        this.props.getUsersThunkCreator(1, this.props.pageSize, term)
+    let onTermChanged = (term: string) => {
+        props.setTerm(term)
+        props.setCurrentPage(1)
+        props.getUsersThunkCreator(1, props.pageSize, term)
     }
 
-    render() {
-        return (
+    return (
             <>
-                {this.props.isFetching ? <Preloader /> : null}
+                {props.isFetching ? <Preloader /> : null}
                 <Users
-                    pagesCount={this.props.pagesCount}
-                    currentPage={this.props.currentPage}
-                    usersData={this.props.usersData}
-                    onUserFollow={this.onUserFollow}
-                    onUserUnfollow={this.onUserUnfollow}
-                    isFetching={this.props.isFetching}
-                    onPageChanged={this.onPageChanged}
-                    followingInProgress={this.props.followingInProgress}
-                    portionsCount={this.props.portionsCount}
-                    portionSize={this.props.portionSize}
-                    onTermChanged={this.onTermChanged}
+                    pagesCount={props.pagesCount}
+                    currentPage={props.currentPage}
+                    usersData={props.usersData}
+                    onUserFollow={onUserFollow}
+                    onUserUnfollow={onUserUnfollow}
+                    isFetching={props.isFetching}
+                    onPageChanged={onPageChanged}
+                    followingInProgress={props.followingInProgress}
+                    portionsCount={props.portionsCount}
+                    portionSize={props.portionSize}
+                    onTermChanged={onTermChanged}
                 />
             </>
-        )       
-    }
+    )       
 }
+
  
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
@@ -91,4 +90,4 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
 
 const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {} , RootStateType>(mapStateToProps, { getUsersThunkCreator, unfollowThunkCreator, followThunkCreator, setCurrentPage, setTerm })(UsersApiComponent)
 
-export default UsersContainer
+export default React.memo(UsersContainer)
