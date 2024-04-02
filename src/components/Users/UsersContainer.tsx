@@ -5,6 +5,7 @@ import Users from './Users.tsx'
 import Preloader from "../Common/Preloader/Preloader.tsx";
 import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getPagesCount, getPortionSize, getPortionsCount, getTerm, getUsersData } from "../../redux/usersSelectors.ts";
 import { RootStateType } from "../../redux/redux-store.ts";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 type MapStateToPropsType = {
     pagesCount: number,
@@ -30,9 +31,26 @@ type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const UsersApiComponent: React.FC<PropsType> = (props) => {
 
+    const[searchParams, setSearchParams] = useSearchParams()
+
     useEffect(() => {
-        props.getUsersThunkCreator(props.currentPage, props.pageSize, props.term)
+        const parsed = Object.fromEntries(searchParams) as {term: string, page: string, count: string}
+
+        let actualPage = props.currentPage
+        if(parsed.page){actualPage = Number(parsed.page)}
+        let actualTerm = props.term
+        if(parsed.term){actualTerm = parsed.term}
+
+        props.getUsersThunkCreator(actualPage, props.pageSize, actualTerm)
     }, [])
+
+    const navigate = useNavigate()
+    useEffect(() => {
+        navigate({
+            pathname:'/users',
+            search: `?term=${props.term}&count=${props.pageSize}&page=${props.currentPage}`
+        })
+    }, [props.term, props.currentPage, props.pageSize])
 
     let onPageChanged = (page: number) => {
         props.setCurrentPage(page)
@@ -68,6 +86,7 @@ const UsersApiComponent: React.FC<PropsType> = (props) => {
                     portionsCount={props.portionsCount}
                     portionSize={props.portionSize}
                     onTermChanged={onTermChanged}
+                    term={props.term}
                 />
             </>
     )       

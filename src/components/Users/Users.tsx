@@ -16,7 +16,8 @@ type PropsType = {
     isFetching: boolean,
     followingInProgress: Array<number>,
     portionsCount: number,
-    portionSize: number
+    portionSize: number,
+    term: string
 }
 
 const Users: React.FC<PropsType> = (props) => {
@@ -35,7 +36,7 @@ const Users: React.FC<PropsType> = (props) => {
     return(
         <div>
             <div>
-                <UserSearchForm onTermChanged={props.onTermChanged}/>
+                <UserSearchForm onTermChanged={props.onTermChanged} term={props.term}/>
             </div>
             <div className={styleUsers.users}>
                 {usersElements}
@@ -49,6 +50,7 @@ const Users: React.FC<PropsType> = (props) => {
 
 type FormPropsType = {
     onTermChanged: (term: string) => void
+    term: string
 }
 
 const UserSearchForm: React.FC<FormPropsType> = (porps) => {
@@ -62,7 +64,8 @@ const UserSearchForm: React.FC<FormPropsType> = (porps) => {
     return (
     <div>
         <Formik
-        initialValues={{term: ''}}
+        enableReinitialize={true}
+        initialValues={{term: porps.term}}
         onSubmit={submit}>
         {({isSubmitting}) => (
             <Form>
