@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
-import styleUser from './User.module.css'
+import styleUser from './User.module.scss'
+import noAvatar from '../../../emptyAvatar.jpg'
 import React from 'react'
 
 type PropsType = {
@@ -13,7 +14,7 @@ type PropsType = {
     return(
         <div className={styleUser.user}>
             <NavLink to={'/profile/' + props.id}>
-                {props.avatar === null ? <div className={styleUser.user__noavatar}>ava</div> : <img className={styleUser.user__avatar} src={props.avatar} /> }
+                {props.avatar === null ? <div><img  className={styleUser.user__noavatar} src={noAvatar}/></div> : <img className={styleUser.user__avatar} src={props.avatar} /> }
             </NavLink>
             <div className={styleUser.user__description}>
                 <div className={styleUser.user__description_name}>

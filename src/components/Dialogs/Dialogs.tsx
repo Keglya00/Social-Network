@@ -1,5 +1,5 @@
 import React from 'react'
-import styleDialogs from './Dialogs.module.css'
+import styleDialogs from './Dialogs.module.scss'
 import Chat from './Chat/Chat.tsx'
 import Message from './Message/Message.tsx'
 import MyMessage from './Message/MyMessage.tsx'

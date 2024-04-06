@@ -1,13 +1,17 @@
 .wrapper{
   min-height: 100%;
   width: 100%;
-  max-width: 1326px;
+  max-width: 1500px;
   padding: 0 15px;
-  margin: 0 auto
+  margin: 5px auto
 }
 
 .container{
   display: flex;
+}
+
+body{
+  background-color:#f9f3ea;
 }
 
 

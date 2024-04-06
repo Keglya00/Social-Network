@@ -1,3 +1,28 @@
+.aboutMe{
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.aboutMe__icon{
+    height: 25px;
+    width: 25px;
+    opacity: .4;
+}
+
+.aboutMe__text{
+    font-weight: 700;
+    line-height: 1.6;
+    padding-left: 25px;
+    .aboutMe__field_text{
+        font-size: 18px;
+    }
+    .aboutMe__sign{
+        font-size: 14px;
+        opacity: .4;
+      }
+}
+
 .aboutMe__title{
     font-weight: 700;
 }
@@ -18,17 +43,14 @@
     display: flex;
     line-height: 0.5;
     align-items: center;
-}
-
-.aboutMe__field_text{
-    padding-right: 10px;
-    font-size: 16px;
+    height: 29px;
 }
 
 .aboutMe__field_button{
     opacity: 0.5;
     transition: .3s;
     cursor: pointer;
+    padding: 0 0 2px 10px;
 }
 
 .aboutMe__field_button:hover{
@@ -37,7 +59,8 @@
 
 .aboutMe__textarea{
     height: 18px;
-    width: 600px;
+    width: 335px;
+    background-color: #f9f3ea;
     resize: none;
     outline: none;
     border-left: none;

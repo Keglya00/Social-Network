@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import headerStyle from './Header.module.css'
+import headerStyle from './Header.module.scss'
 import React from 'react'
 
 type PropsType = {
@@ -23,10 +23,10 @@ const Header: React.FC<PropsType> = (props) => {
                 </div>
             </div>
                 <div className={headerStyle.header__login}>
-                    {props.isAuth ? null : <NavLink to='/login' className={headerStyle.header__login}>Login</NavLink> }
-                    {props.isAuth && props.userAvatar ? <img src={props.userAvatar} className={headerStyle.header__login_avatar} /> : null }
-                    {props.isAuth ? props.login : null}
-                    {props.isAuth ? <div className={headerStyle.header__login} onClick={props.logout}>Logout</div> : null }
+                    {props.isAuth ? null : <NavLink to='/login' className={headerStyle.header__login_button}>Login</NavLink> }
+                    {props.isAuth && props.userAvatar ? <div className={headerStyle.login__avatar_container}><img src={props.userAvatar} className={headerStyle.header__login_avatar} /></div> : null }
+                    {props.isAuth ? <div className={headerStyle.header__login_nickName}>{props.login}</div> : null}
+                    {props.isAuth ? <div className={headerStyle.header__login_button} onClick={props.logout}>Logout</div> : null }
                 </div>
         </header>
     )

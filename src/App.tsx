@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React from 'react';
 import HeaderContainer from './components/Header/HeaderContainer.tsx';
 import NavbarContainer from './components/Navbar/NavbarContainer.tsx';

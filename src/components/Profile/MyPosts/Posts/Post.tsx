@@ -1,4 +1,4 @@
-import stylePost from './Post.module.css'
+import stylePost from './Post.module.scss'
 import React from 'react'
 
 type PorpsType = {

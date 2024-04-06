@@ -1,5 +1,5 @@
 import React from 'react'
-import styleLogin from './Login.module.css'
+import styleLogin from './Login.module.scss'
 import { Form, Field } from 'react-final-form'
 import { RequiredInput } from '../Common/FormControls/FormComponents.tsx'
 import { required } from '../../utilits/validators.ts'

@@ -1,4 +1,4 @@
-import stylePaginator from './Paginator.module.css'
+import stylePaginator from './Paginator.module.scss'
 import arrow from '../../../images/arrow.svg'
 import { useState } from 'react'
 import React from 'react'

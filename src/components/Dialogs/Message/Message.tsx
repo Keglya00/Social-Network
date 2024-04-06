@@ -1,4 +1,4 @@
-import styleMessage from './Message.module.css'
+import styleMessage from './Message.module.scss'
 import React from 'react'
 
 type PropsType = {

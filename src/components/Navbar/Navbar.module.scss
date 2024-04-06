@@ -1,0 +1,33 @@
+.nav{
+  grid-area: nav;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 1px  #6F4E37;
+  margin-right: 10px;
+  width: 180px;
+  height: 600px;
+}
+
+.nav__list{
+  margin: 40px 0;
+  font-size: 18px;
+  list-style-type: none;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  padding: 5px 0;
+  color: black;
+  transition: .3s;
+  display: inline-block;
+}
+
+a:hover{
+  transform: scale(1.1);
+}
+
+.active{
+  transform: scale(1.15);
+}

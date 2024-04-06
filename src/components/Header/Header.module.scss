@@ -1,22 +1,24 @@
 .header{
   grid-area: header;
-  background-color: #BEA895;
+  background-color: white;
   display: flex;
   justify-content: space-between;
+  font-family: sans-serif;
   align-items: center;
-  border-radius: 20px;
-  height: 60px;
+  border-radius: 10px;
+  height: 65px;
   margin-bottom: 10px;
   box-shadow: 2px 2px 2px 1px  #6F4E37;
 }
 
 .header__top{
   display: flex;
+  align-items: center;
 }
 
 .header__top_name{
   padding-left:20px;
-  color: white;
+  color: black;
   font-size: 20px;
   font-family: Roboto, sans-serif;
   font-weight:700;
@@ -28,17 +30,32 @@
 
 .header__login{
   display: flex;
-  color: white;
+  color: black;
   font-size: 18px;
-  font-family: sans-serif;
   font-weight:700;
   align-items: center;
   text-align: right;
   margin: 0 30px;
+  cursor: pointer;
 }
 
-.header__login_avatar{
-  border-radius: 50px;
-  height: 50px;
-  margin: 0 10px;
+.header__login_button{
+  margin: 0 20px;
+  border-color: black;
 }
+
+.login__avatar_container{
+  background-color: black;
+  display: flex;
+  height: 53px;
+  width: 53px;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px;
+  border-radius: 50px;
+  .header__login_avatar{
+    height: 50px;
+    border-radius: 50px;
+  }
+}
+

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import navbarSlyle from './Navbar.module.css'
+import navbarSlyle from './Navbar.module.scss'
 import React from 'react'
 
 // Функция создает класс для активной ссылки

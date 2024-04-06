@@ -1,5 +1,5 @@
 import React from 'react'
-import styleMyPosts from './MyPosts.module.css'
+import styleMyPosts from './MyPosts.module.scss'
 import Post from './Posts/Post.tsx'
 import { Form, Field } from 'react-final-form'
 import { required } from '../../../utilits/validators.ts'

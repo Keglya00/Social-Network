@@ -1,0 +1,70 @@
+.content__top_avatar{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  .content__avatar_photo{
+    border: 2.5px solid;
+    height: 150px;
+    width: 150px;
+    border-radius: 80px;
+  }
+}
+  
+.content__top_description{
+  list-style-type: none;
+  font-family: sans-serif;
+  line-height: 1.6;
+  padding-inline-start: 30px;
+  margin-top: 50px;
+}
+  
+.content__top{
+  margin: 50px 0;
+  width: 440px;
+}
+
+.content__avatar_input{
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  }
+
+.content__avatar_button{
+  position: absolute;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  opacity: .5;
+}
+  
+.content__avatar_container{
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.content__description_item{
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.description__item_icon{
+  height: 25px;
+  width: 25px;
+  opacity: .4;
+}
+
+.description__item_text{
+  font-weight: 700;
+  line-height: 1.6;
+  padding-left: 25px;
+  .item__text_name{
+    font-size: 18px;
+  }
+  .item__text_sign{
+    font-size: 14px;
+    opacity: .4;
+  }
+}

@@ -1,4 +1,5 @@
-import styleUsers from './Users.module.css'
+import styleUsers from './Users.module.scss'
+import searchIcon from '../../images/searchIcon.png'
 import User from "./User/User.tsx"
 import Paginator from '../Common/Paginator/Paginator.tsx'
 import React from 'react'
@@ -34,15 +35,16 @@ const Users: React.FC<PropsType> = (props) => {
         )
 
     return(
-        <div>
+        <div className={styleUsers.users__container}>
             <div>
                 <UserSearchForm onTermChanged={props.onTermChanged} term={props.term}/>
             </div>
             <div className={styleUsers.users}>
                 {usersElements}
+                
             </div>
-            <div>
-                <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged} portionSize={props.portionSize} portionsCount={props.portionsCount} pagesCount={props.pagesCount} />
+            <div className={styleUsers.paginator}>
+            <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged} portionSize={props.portionSize} portionsCount={props.portionsCount} pagesCount={props.pagesCount} />
             </div>
         </div>
     )
@@ -53,11 +55,11 @@ type FormPropsType = {
     term: string
 }
 
-const UserSearchForm: React.FC<FormPropsType> = (porps) => {
+const UserSearchForm: React.FC<FormPropsType> = (props) => {
 
     type FormValuesType = {term: string}
     const submit = (values: FormValuesType, {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}) => {
-        porps.onTermChanged(values.term)
+        props.onTermChanged(values.term)
         setSubmitting(false)
     }
 
@@ -65,12 +67,12 @@ const UserSearchForm: React.FC<FormPropsType> = (porps) => {
     <div>
         <Formik
         enableReinitialize={true}
-        initialValues={{term: porps.term}}
+        initialValues={{term: props.term}}
         onSubmit={submit}>
         {({isSubmitting}) => (
-            <Form>
-                <Field type='text' name='term' />
-                <button type='submit' disabled={isSubmitting}>find</button>
+            <Form  className={styleUsers.search}>
+                <Field className={styleUsers.search__input} onChange={(e) => props.onTermChanged(e.currentTarget.value)} placeholder='search' type='text' name='term' />
+                <button className={styleUsers.search__button_container} type='submit' disabled={isSubmitting}><img className={styleUsers.search__button} src={searchIcon}/></button>
             </Form>
         )}
         </Formik>

@@ -4,13 +4,14 @@
 }
 
 .user__noavatar{
-    background-color:#BEA895;
-    display: inline-block;
-    padding: 15px 15px;
+    width: 55px;
+    height: 55px;  
     border-radius: 50px;
+    border: 2px black solid;
 }
 
 .user__avatar{
+    border: 2px black solid;
     border-radius: 50px;
     width: 55px;
     height: 55px;  
@@ -18,8 +19,10 @@
 
 .user__description{
     padding-left: 5px;
+    font-size: 17px;
 }
 
 .user__description_status{
     opacity: 0.7;
+    font-size: 14px;
 }

@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react"
+import styleStatus from './ProfileStatus.module.scss'
+import statusIcon from '../../../../images/statusIcon.png'
 
 type PropsType = {
     status: string,
@@ -30,10 +32,14 @@ const ProfileStatus: React.FC<PropsType> = (props) => {
     }
 
     return(
-        <div>
-            {editMode
-            ? <div><input onBlur={deactivateEditMode} onChange={onStatusChange} autoFocus={true} value={status} /></div> 
-            : <div onDoubleClick={activateEditMode}>{status || 'No status'}</div>}
+        <div className={styleStatus.status}>
+            <div><img className={styleStatus.status__icon} src={statusIcon} /></div>
+            <div className={styleStatus.status__text}>
+                {editMode
+                ? <div><input className={styleStatus.status__text_input} onBlur={deactivateEditMode} onChange={onStatusChange} autoFocus={true} value={status} /></div> 
+                : <div className={styleStatus.status__text_name} onDoubleClick={activateEditMode}>{status || 'No status'}</div>}
+                <div className={styleStatus.status__text_sign}>status</div>
+            </div>
         </div>
     )
 }
