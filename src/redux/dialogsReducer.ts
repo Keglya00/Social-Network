@@ -1,3 +1,8 @@
+import { ThunkAction } from 'redux-thunk';
+import { RootStateType } from './redux-store';
+import { chatApi } from '../ApiWsChat.ts';
+import { Dispatch } from 'redux';
+
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
 type InitialStateType = typeof initialState
@@ -8,32 +13,25 @@ export type ChatType = {
 }
 export type MessageType = {
     message: string,
-    id: number,
-    isMine: boolean,
+    userId: number,
+    photo: string,
+    userName: string
 }
 let initialState = {
     chatsData: [
         {username:'Spirit', userid:'@Spirit'},
         {username:'R3ZAN', userid:'@R3ZAN'}
     ] as Array<ChatType>,
-    messagesData: [
-        {message:'Hi', id: 1, isMine: true},
-        {message:'Hello', id: 2, isMine: false},
-        {message:'How are u', id: 2, isMine: true},
-        {message:'Great', id: 1, isMine: false},
-        {message:'Thanks', id: 3, isMine: true},
-        {message:'Thanks', id: 3, isMine: false}
-    ] as Array<MessageType>
+    messagesData: [] as Array<MessageType>
 }
 
 const dialogsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
 
     switch(action.type){
         case ADD_MESSAGE:{
-            let newMessage = {id: 4, message: action.newMessage, isMine: true}
              return {
                 ...state,
-                messagesData: [...state.messagesData, newMessage]
+                messagesData: [...state.messagesData, action.newMessage]
             }
         }       
         default: 
@@ -42,9 +40,24 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionTy
 
 }
 
-type ActionType = AddMessageActionCreatorType
+const newMessageHandler = (dispatch: Dispatch) => (messages: Array<MessageType>) => {
+    messages.forEach(message => dispatch(addMessage(message)))
+}
 
-type AddMessageActionCreatorType = {type: typeof ADD_MESSAGE, newMessage: string}
-export const addMessageActionCreator = (newMessage: string): AddMessageActionCreatorType => {return {type: ADD_MESSAGE, newMessage}}
+type ActionType = AddMessage
+type ThunkType = ThunkAction<Promise<void>, RootStateType, unknown, ActionType>
+
+type AddMessage = {type: typeof ADD_MESSAGE, newMessage: MessageType}
+export const addMessage = (newMessage: MessageType): AddMessage => {return {type: ADD_MESSAGE, newMessage}}
+export const startWsChannel = (): ThunkType => async (dispatch) =>{
+    chatApi.start()
+    chatApi.subscribe(newMessageHandler(dispatch))
+}
+export const stopWsChannel = (): ThunkType => async (dispatch) =>{
+    chatApi.unsubscribe(newMessageHandler(dispatch))
+}
+export const sendMessage = (message: string): ThunkType => async (dispatch) => {
+    chatApi.sendMessage(message)
+}
 
 export default dialogsReducer

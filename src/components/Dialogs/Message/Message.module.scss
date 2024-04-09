@@ -1,14 +1,35 @@
 .message{
+    display: flex;
+    align-items: center;
+}
+
+.message__inner{
     background-color: white;
-    width: fit-content;
-    padding: 3px;
-    margin: 5px 0;
+    display:inline-block;
+    padding: 7px 7px;
+    border-radius: 3px 12px 12px 1px;
+}
+
+.message__photo{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    border: black 2px solid;
+    margin: 3px;
+}
+
+.message__name{
+    text-align: right;
+    font-size: 13px;
+    padding-bottom: 2px;
+    font-weight: 700;
 }
 
 .mymessage__inner{
     text-align: right;
     background-color: #BEA895;
     display:inline-block;
-    margin: 5px 0;
+    padding: 7px 7px;
+    border-radius: 12px 3px 1px 12px;
 }
 

@@ -2,14 +2,20 @@ import styleMessage from './Message.module.scss'
 import React from 'react'
 
 type PropsType = {
-    message: string
+    message: string,
+    photo: string,
+    userName: string
 }
 
-const Message: React.FC<PropsType> = (messagesData) => {
+const Message: React.FC<PropsType> = (props) => {
     return(
-        <div  className={styleMessage.message}>
-            {messagesData.message}
-        </div>       
+        <div className={styleMessage.message}>
+            <img className={styleMessage.message__photo} src={props.photo} />
+            <div className={styleMessage.message__inner}>
+                <div className={styleMessage.message__name}>{props.userName}</div>
+                {props.message}
+            </div>
+        </div>     
     )
 } 
 

@@ -14,14 +14,27 @@
     margin-left: 250px;
     background-color: #F3F4F5;
     width: 780px;
+    overflow-y: scroll;
+    height: 600px;
     font-family: Roboto;
     font-size: 18px;
     font-weight: 500;
 }
 
+%message{
+    font-size: 15px;
+    padding: 5px 15px;
+    font-family: sans-serif;
+}
+
 .mymessage{
+    @extend %message;
     color: white;
     text-align: right;
+}
+
+.message{
+    @extend %message;
 }
 
 .dialogs__addMessages_textarea{

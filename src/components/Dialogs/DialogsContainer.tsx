@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react'
-import { ChatType, MessageType, addMessageActionCreator} from '../../redux/dialogsReducer.ts'
+import { ChatType, MessageType, addMessage, sendMessage, startWsChannel, stopWsChannel} from '../../redux/dialogsReducer.ts'
 import { MapDispatchToProps, connect } from 'react-redux'
 import Dialogs from './Dialogs.tsx'
 import { withAuthReirect } from '../../hoc/withAuthRedirect.tsx'
@@ -8,28 +8,26 @@ import { RootStateType } from '../../redux/redux-store.ts'
 
 type MapStateToPropsType = {
     chatsData: Array<ChatType>,
-    messagesData: Array<MessageType>
+    messagesData: Array<MessageType>,
+    id: number
 }
 
 type MapDispatchToPropsType = {
-    addMessage: (newMessage: string) => void
+    addMessage: (newMessage: MessageType) => void
+    startWsChannel: () => void
+    stopWsChannel: () => void
+    sendMessage: (message: string) => void
 }
 
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
         chatsData: state.dialogsReducer.chatsData,
-        messagesData: state.dialogsReducer.messagesData
+        messagesData: state.dialogsReducer.messagesData,
+        id: state.authReducer.data.id
     }
 }
 
-let mapDispatchToProps = (dispatch: any): MapDispatchToPropsType => {
-    return{
-        addMessage: (newMessage: string) => {
-            dispatch(addMessageActionCreator(newMessage))
-        },
-    }
-}
 
-const DialogsContainer = compose<ComponentType>(connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, mapDispatchToProps), withAuthReirect )(Dialogs)
+const DialogsContainer = compose<ComponentType>(connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, {addMessage, startWsChannel, stopWsChannel, sendMessage}), withAuthReirect )(Dialogs)
 
 export default DialogsContainer
