@@ -1,6 +1,8 @@
 .message{
     display: flex;
     align-items: center;
+    max-width: 300px;
+    overflow: hidden;
 }
 
 .message__inner{
@@ -26,7 +28,9 @@
 }
 
 .mymessage__inner{
-    text-align: right;
+    max-width: 300px;
+    overflow: hidden;
+    text-align: left;
     background-color: #BEA895;
     display:inline-block;
     padding: 7px 7px;

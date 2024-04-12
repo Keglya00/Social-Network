@@ -9,6 +9,7 @@ import { initializeApp } from './redux/appReducer.ts';
 import { connect } from 'react-redux';
 import Preloader from './components/Common/Preloader/Preloader.tsx';
 import { RootStateType } from './redux/redux-store.ts';
+import { startWsChannel, stopWsChannel } from './redux/dialogsReducer.ts';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer.tsx'))
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer.tsx'))
 
@@ -17,6 +18,8 @@ type MapStateToPropsType = {
 }
 type MapDispatchToPropsType = {
   initializeApp: () => void
+  startWsChannel: () => void
+  stopWsChannel: () => void
 }
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -29,6 +32,11 @@ class App extends React.Component<PropsType> {
   componentDidMount() {
     this.props.initializeApp()
     window.addEventListener('unhandledrejection', this.catchUnhandledErrors)
+    this.props.startWsChannel()
+  }
+
+  componentWillUnmount() {
+      this.props.stopWsChannel()
   }
 
   render() {
@@ -65,4 +73,4 @@ let mapStateToProps = (state: RootStateType) => {
   }
 }
 
-export default connect(mapStateToProps, { initializeApp } )(App);
+export default connect(mapStateToProps, { initializeApp, startWsChannel, stopWsChannel } )(App);
