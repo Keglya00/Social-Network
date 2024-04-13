@@ -6,15 +6,20 @@ import MyMessage from './Message/MyMessage.tsx'
 import { Field, Form } from 'react-final-form'
 import { required } from '../../utilits/validators.ts'
 import { ChatType, MessageType, StatusType} from '../../redux/dialogsReducer'
+import { getCurrenrId } from '../../ApiWsChat.ts'
 
 type PropsType = {
     chatsData: Array<ChatType>,
     messagesData: Array<MessageType>,
     id: number,
     wsStatus: StatusType,
+    currentUserId: number
     startWsChannel: () => void
     stopWsChannel: () => void
-    sendMessage: (message: string) => void
+    sendMessage: (userId: number, message: string) => void
+    setChats: () => void
+    setCurrentUserId: (userId: number) => void
+    setMessages: (userId: number) => void
 }
 type AddMessageFormPropsType = {
     wsStatus: StatusType
@@ -23,6 +28,20 @@ type AddMessageFormPropsType = {
 
 const Dialogs: React.FC<PropsType> = React.memo((props) => {
     
+    useEffect(() => {
+        props.setChats()
+    }, [])
+
+    useEffect(() => {
+        if(props.currentUserId) {
+            props.setMessages(props.currentUserId)
+        }
+    }, [props.currentUserId])
+
+    let onSetCurrentUserId = (userId: number) => {
+        props.setCurrentUserId(userId)
+    } 
+
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -46,14 +65,17 @@ const Dialogs: React.FC<PropsType> = React.memo((props) => {
         if(!newMessage){
             return
         }
-        props.sendMessage(newMessage)
+        props.sendMessage(props.currentUserId, newMessage)
     }
 
-    let chatsElements = props.chatsData.map((chat) => <li><Chat username={chat.username} userid={chat.userid}/></li>)
+    let chatsElements = props.chatsData.map((chat) => <li onClick={() => {
+        onSetCurrentUserId(chat.id)
+        getCurrenrId(chat.id)
+    }}><Chat username={chat.userName} userid=''/></li>)
 
-    let messagesElements = props.messagesData.map((message) => message.userId === props.id 
-    ? <div className={styleDialogs.mymessage}><MyMessage message={message.message} /></div>
-    : <div className={styleDialogs.message}><Message message={message.message} photo={message.photo} userName={message.userName}/></div>
+    let messagesElements = props.messagesData.map((message) => message.senderId === props.id 
+    ? <div className={styleDialogs.mymessage}><MyMessage message={message.body} /></div>
+    : <div className={styleDialogs.message}><Message message={message.body} userName={message.senderName}/></div>
     )
 
     return(
@@ -63,7 +85,7 @@ const Dialogs: React.FC<PropsType> = React.memo((props) => {
             </ul>
             <div className={styleDialogs.dialogs__messages} onScroll={scrollHandler}>
                 {messagesElements}
-                <AddMessageForm addMessage={onAddMessageClick} wsStatus={props.wsStatus} />
+                {props.currentUserId ? <AddMessageForm addMessage={onAddMessageClick} wsStatus={props.wsStatus} /> : null}
                 <div ref={messagesAnchorRef}></div>
             </div>
         </div>

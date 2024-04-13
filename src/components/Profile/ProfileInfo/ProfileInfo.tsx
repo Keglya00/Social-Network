@@ -3,6 +3,7 @@ import ProfileStatus from './ProfileStatus/ProfileStatus.tsx'
 import emptyAvatar from '../../../emptyAvatar.jpg'
 import addButton from '../../../images/addButton.png'
 import usernameIcon from '../../../images/userNameIcon.png'
+import messageIcon from '../../../images/message-icon.svg'
 import AboutMe from './AboutMe/AboutMe.tsx'
 import React from 'react'
 import { PhotosType } from '../../../redux/profileReducer'
@@ -15,7 +16,8 @@ type PropsType = {
     status: string,
     setUserAboutMe: (aboutMe: string) => void,
     saveAvatar: (avatar: any) => void,
-    updateStatus: (status: string) => void
+    updateStatus: (status: string) => void,
+    onAddChat: () => void
 }
 
 const ProfileInfo: React.FC<PropsType> = (props) => {
@@ -33,7 +35,10 @@ const ProfileInfo: React.FC<PropsType> = (props) => {
                 <div className={styleProfileInfo.avatar__photo_container}>
                     <img className={styleProfileInfo.content__avatar_photo} src={props.photos.large || emptyAvatar} />
                 </div>
-                {props.isOwner && <div className={styleProfileInfo.content__avatar_container}><img  className={styleProfileInfo.content__avatar_button} src={addButton} /><input className={styleProfileInfo.content__avatar_input} onClick={onAvatarSelected} type={'file'} /></div>}
+                {props.isOwner
+                ? <div className={styleProfileInfo.content__avatar_container}><img className={styleProfileInfo.content__avatar_button} src={addButton} /><input className={styleProfileInfo.content__avatar_input} onClick={onAvatarSelected} type={'file'} /></div>
+                : <div onClick={props.onAddChat} className={styleProfileInfo.content__avatar_container}><img className={styleProfileInfo.content__avatar_button} src={messageIcon} /></div>
+                }
             </div>
             <ul className={styleProfileInfo.content__top_description}>
                 <li className={styleProfileInfo.content__description_item}>

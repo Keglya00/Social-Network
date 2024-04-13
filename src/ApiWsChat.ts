@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux"
 import { MessageType, StatusType, sendMessage } from "./redux/dialogsReducer"
+import { RootStateType } from "./redux/redux-store"
 
-type MessageRecievedSubscriberType = (messages: Array<MessageType>) => void
+type MessageRecievedSubscriberType = (currentId: number) => void
 type WsStatusChangedSubscriberType = (wsStatus: StatusType) => void
 export type EventType = 'message-recieved' | 'wsStatus-changed'
 
@@ -20,9 +22,11 @@ const openHandler = () => {
     subscribers["wsStatus-changed"].forEach(subscriber => subscriber('ready'))
 }
 
+let currentId = 0
+export let getCurrenrId = (currentUserId: number) => currentId = currentUserId
 const messageHandler = (e: MessageEvent) => {
-    const newMessages = JSON.parse(e.data)
-    subscribers["message-recieved"].forEach(subscriber => subscriber(newMessages))
+    debugger
+    subscribers["message-recieved"].forEach(subscriber => subscriber(currentId))
 }
 
 const errorHandler = () => {

@@ -7,6 +7,7 @@ import withRouter from '../../hoc/withRouter.tsx';
 import { withAuthReirect } from "../../hoc/withAuthRedirect.tsx";
 import { compose } from "redux";
 import { RootStateType } from "../../redux/redux-store.ts";
+import { addChat } from "../../redux/dialogsReducer.ts";
 
 type OwnPropsType = {
     params: {
@@ -26,7 +27,8 @@ type MapDispatchToPropsType = {
     updateStatus: (status: string) => void,
     setAboutMe: (aboutMe: string) => void,
     uploadAboutMe: (profile: ProfileType, aboutMe: string) => void,
-    saveAvatar: (avatar: any) => void
+    saveAvatar: (avatar: any) => void,
+    addChat: (userId: number) => void
 }   
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
@@ -50,6 +52,10 @@ const ProfileApiComponent: React.FC<PropsType> = (props) => {
         props.uploadAboutMe(props.profile, aboutMe)
     }
 
+    let onAddChat = () => {
+        props.addChat(Number(props.params.userId))
+    }
+
     return (
         <>
             {props.isFetching ? <Preloader /> : null}
@@ -60,6 +66,7 @@ const ProfileApiComponent: React.FC<PropsType> = (props) => {
             status={props.status} 
             updateStatus={props.updateStatus}
             setUserAboutMe={setUserAboutMe}
+            onAddChat={onAddChat}
             /> : null }
         </>
     )
@@ -75,6 +82,6 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     }
 }
 
-const ProfileContainer = compose<ComponentType >(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe }), withAuthReirect, withRouter )(ProfileApiComponent)
+const ProfileContainer = compose<ComponentType >(connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateType>(mapStateToProps, {getUsersProfile, uploadAboutMe, updateStatus, saveAvatar, setAboutMe, addChat }), withAuthReirect, withRouter )(ProfileApiComponent)
 
 export default React.memo(ProfileContainer)

@@ -3,14 +3,13 @@ import React from 'react'
 
 type PropsType = {
     message: string,
-    photo: string,
     userName: string
 }
 
 const Message: React.FC<PropsType> = (props) => {
     return(
         <div className={styleMessage.message}>
-            <img className={styleMessage.message__photo} src={props.photo} />
+            <img className={styleMessage.message__photo} />
             <div className={styleMessage.message__inner}>
                 <div className={styleMessage.message__name}>{props.userName}</div>
                 {props.message}

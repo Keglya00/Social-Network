@@ -1,6 +1,7 @@
 import axios from "axios";
 import { UsersDataType } from "./redux/usersReducer";
 import { PhotosType, ProfileType } from "./redux/profileReducer";
+import { ChatType, MessageType } from "./redux/dialogsReducer";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0',
@@ -129,5 +130,41 @@ export type OnUserUnfollowType = {
 export const onUserUnfollow = (userId: number) => {
     return instance
     .delete<OnUserUnfollowType>(`/follow/${userId}`)
+    .then(responce => responce.data)
+}
+
+export type AddChatWithUserType = {
+    data: {},
+    fieldsErrors: Array<string>,
+    messages: Array<string>,
+    resultCode: number
+}
+export const addChatWithUser = (userId: number) => {
+    return instance
+    .put<AddChatWithUserType>(`/dialogs/${userId}`)
+    .then(responce => responce.data)
+}
+
+type GetUserChatsType = Array<ChatType>
+export const getUserChats = () => {
+    return instance
+    .get<GetUserChatsType>(`/dialogs`)
+    .then(responce => responce.data)
+}
+
+type GetListOfMessagesType = {
+    error: null | string,
+    items: Array<MessageType>,
+    totalCount: number
+}
+export const getListOfMessages = (userId: number) => {
+    return instance
+    .get<GetListOfMessagesType>(`dialogs/${userId}/messages?count=${20}`)
+    .then(responce => responce.data)
+} 
+
+export const sendMessageToUser = (userId: number, body: string) => {
+    return instance
+    .post(`dialogs/${userId}/messages`, {body})
     .then(responce => responce.data)
 }
