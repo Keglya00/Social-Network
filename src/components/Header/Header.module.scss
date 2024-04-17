@@ -1,6 +1,6 @@
 .header{
   grid-area: header;
-  background-color: white;
+  background-color: #23282B;
   display: flex;
   justify-content: space-between;
   font-family: sans-serif;
@@ -8,7 +8,7 @@
   border-radius: 10px;
   height: 65px;
   margin-bottom: 10px;
-  box-shadow: 2px 2px 2px 1px  #6F4E37;
+  box-shadow: 1px 1px 1px 1px  #00FF7F;
 }
 
 .header__top{
@@ -18,7 +18,7 @@
 
 .header__top_name{
   padding-left:20px;
-  color: black;
+  color: white;
   font-size: 20px;
   font-family: Roboto, sans-serif;
   font-weight:700;
@@ -30,7 +30,7 @@
 
 .header__login{
   display: flex;
-  color: black;
+  color: white;
   font-size: 18px;
   font-weight:700;
   align-items: center;

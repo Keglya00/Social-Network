@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import editButton from '../../../../images/editButton.png'
 import styleAboutMe from './AboutMe.module.scss'
-import checkButton from '../../../../images/checkmark.svg'
-import bioIcon from '../../../../images/bio.svg'
+import checkButton from '../../../../images/checkmark.png'
+import bioIcon from '../../../../images/bio.png'
 import React from 'react'
 
 type PropsType = {
@@ -32,7 +32,7 @@ const AboutMe: React.FC<PropsType> = (props) => {
     }
 
     let onAboutMeChanged = (aboutMe: any) => {
-        if(aboutMe.currentTarget.value.length < 70) {
+        if(aboutMe.currentTarget.value.length < 100) {
             setAboutme(aboutMe.currentTarget.value)
         }
     }
@@ -43,12 +43,12 @@ const AboutMe: React.FC<PropsType> = (props) => {
             <div className={styleAboutMe.aboutMe__text}>
                 {editMode 
                 ? <div>
-                    <textarea onChange={onAboutMeChanged} value={aboutMe} placeholder={'only 70 symbols are avalable'} className={styleAboutMe.aboutMe__textarea} />
+                    <textarea onChange={onAboutMeChanged} value={aboutMe} placeholder={'only 100 symbols are avalable'} className={styleAboutMe.aboutMe__textarea} />
                     <span onClick={deactivateEditMode} ><img className={styleAboutMe.aboutMe__button_check} src={checkButton} /></span>
                 </div>
                 : <div className={styleAboutMe.aboutMe__field}>
                     <div className={styleAboutMe.aboutMe__field_text}>{props.aboutMe || 'No bio'}</div>
-                    {props.isOwner && <span className={styleAboutMe.aboutMe__field_button} onClick={activateEditMode}><img src={editButton} /></span>}
+                    {props.isOwner && <span className={styleAboutMe.aboutMe__field_button} onClick={activateEditMode}><img className={styleAboutMe.aboutMe__button_edit} src={editButton} /></span>}
                 </div>
                 }
                 <div className={styleAboutMe.aboutMe__sign}>bio</div>

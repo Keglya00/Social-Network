@@ -2,9 +2,12 @@
     font-weight: 700;
     font-size: 17px;
     padding: 0 5px;
+    color: #00FF7F;
 }
 
 .pages__container{
+    color: white;
+    opacity: .75;
     display: flex;
     justify-content: center;
 }
@@ -16,11 +19,14 @@
 }
 
 .button_next{
-    transform: rotate(180deg);
+    opacity: .75;
     height: 25px;
 }
 
 .button_prev{
+    transform: rotate(180deg);
+    font-weight: 700;
+    opacity: .75;
     height: 25px;
 }
 

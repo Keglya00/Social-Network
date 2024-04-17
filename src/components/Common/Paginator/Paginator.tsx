@@ -1,5 +1,5 @@
 import stylePaginator from './Paginator.module.scss'
-import arrow from '../../../images/arrow.svg'
+import arrow from '../../../images/arrow.png'
 import { useState } from 'react'
 import React from 'react'
 

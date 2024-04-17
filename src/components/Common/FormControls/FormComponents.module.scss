@@ -1,22 +1,32 @@
 .required__requiredSign {
+    padding-left: 5px;
     width: 25px;
     height: 25px;
 }
 
-.required__input {
+%myinput{
+    background-color: #1c1c1c;
+    border: solid;
     width: 300px;
     height: 30px;
     margin: 5px 0;
     border-radius: 20px;
+    border-color: black;
     font-size: 14px;
+    color: white;
+    opacity: .8;
+    &::placeholder{
+        font-size: 13px;
+        padding-left: 3px       
+    }
+}
+
+.required__input {
+    @extend %myinput;
 }
 
 .required__input_error {
-    width: 300px;
-    height: 30px;
-    margin: 5px 0;
-    border-radius: 20px;
-    font-size: 14px;
+    @extend %myinput;
     border: red 2px solid;
 }
 

@@ -1,4 +1,28 @@
 .chat{
-    color: black;
-    padding: 20px 0;
+    display: flex;
+    color: white;
+    opacity: .9;
+    margin: 5px 3px 5px 15px;
+    padding: 15px 0 15px 20px;
+    font-family: sans-serif;
+    width: 300px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .15s;
+    &:hover{
+        background-color: rgba(170, 170, 170, 0.08);
+    }
+    &:active{
+        box-shadow: 0px 0px 0px 1px#00FF7F;
+    }
+}
+
+.chat__photo{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.chat__username{
+    padding: 6px 0 0 10px;
 }

@@ -37,13 +37,15 @@ const Login: React.FC<PropsType> = (props) => {
     }
 
     return (
-        <div className={styleLogin.login}>
-            <div className={styleLogin.login__inner}>
-                <div className={styleLogin.login__top}>
-                    Log In
+        <div className={styleLogin.login__container}>
+            <div className={styleLogin.login}>
+                <div className={styleLogin.login__inner}>
+                    <div className={styleLogin.login__top}>
+                        Log In
+                    </div>
+                    {props.errorMessage ? <div className={styleLogin.errorMessage}>{props.errorMessage}</div> : null }
+                    <LoginForm onSubmit={onSubmit} captcha={props.captcha} />
                 </div>
-                {props.errorMessage ? <div className={styleLogin.errorMessage}>{props.errorMessage}</div> : null }
-                <LoginForm onSubmit={onSubmit} captcha={props.captcha} />
             </div>
         </div>
     )

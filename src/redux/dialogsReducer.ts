@@ -10,6 +10,7 @@ const ADD_MESSAGES = 'ADD-MESSAGES'
 const SET_WS_STATUS = 'SET_WS_STATUS'
 const ADD_USER_CHATS = 'ADD_USER_CHATS'
 const SET_CURRENT_USER_ID = 'SET_CURRENT_USER_ID'
+const SET_CURRENT_USER_DATA = 'SET_CURRENT_USER_DATA'
 
 type InitialStateType = typeof initialState
 export type StatusType = 'pending' | 'ready'
@@ -20,6 +21,10 @@ export type ChatType = {
     lastUserActivityDate: string
     newMessagesCount: number
     photos: PhotosType
+    userName: string
+}
+export type CurrentUserDataType = {
+    photo: string,
     userName: string
 }
 export type MessageType = {
@@ -36,7 +41,8 @@ let initialState = {
     chatsData: [] as Array<ChatType>,
     messagesData: [] as Array<MessageType>,
     wsStatus: 'pending' as StatusType,
-    currentUserId: 0
+    currentUserId: 0,
+    currentUserData: {} as CurrentUserDataType
 }
 
 const dialogsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
@@ -72,6 +78,12 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionTy
                 currentUserId: action.userId
             }
         }
+        case SET_CURRENT_USER_DATA: {
+            return {
+                ...state,
+                currentUserData: action.data
+            }
+        }
         default: 
             return state         
     }
@@ -86,7 +98,7 @@ const newStatusHandler = (dispatch: Dispatch) => (wsStatus: StatusType) => {
     dispatch(setWsStatus(wsStatus))
 }
 
-type ActionType = AddMessagesType | SetWsStatusType | CleanMessagesDataType | AddUserChatsType | SetCurrentUserIdType
+type ActionType = AddMessagesType | SetWsStatusType | CleanMessagesDataType | AddUserChatsType | SetCurrentUserIdType | SetCurrentUserDataType
 type ThunkType = ThunkAction<Promise<void>, RootStateType, unknown, ActionType>
 
 type CleanMessagesDataType = {type: typeof CLEAN_MESSAGES_DATA}
@@ -103,6 +115,9 @@ export const addUserChats = (chats: Array<ChatType>): AddUserChatsType => {retur
 
 type SetCurrentUserIdType = {type: typeof SET_CURRENT_USER_ID, userId: number}
 export const setCurrentUserId = (userId: number): SetCurrentUserIdType => {return{type: SET_CURRENT_USER_ID, userId}}
+
+type SetCurrentUserDataType = {type: typeof SET_CURRENT_USER_DATA, data: CurrentUserDataType}
+export const setCurrentUserData = (userName: string, photo: string): SetCurrentUserDataType => {return{type: SET_CURRENT_USER_DATA, data: {photo, userName}}}
 
 export const startWsChannel = (): ThunkType => async (dispatch) =>{
     chatApi.start()
@@ -127,7 +142,6 @@ export const setChats = (): ThunkType => async (dispatch) => {
     dispatch(addUserChats(data))
 }
 export const setMessages = (userId: number): ThunkType => async (dispatch) => {
-    debugger
     let data = await getListOfMessages(userId)
     dispatch(addMessages(data.items))
 }

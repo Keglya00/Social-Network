@@ -11,6 +11,8 @@
 }
   
 .content__top_description{
+  color: white;
+  opacity: .9;
   list-style-type: none;
   font-family: sans-serif;
   line-height: 1.6;
@@ -19,7 +21,7 @@
 }
   
 .content__top{
-  margin: 50px 0;
+  margin: 50px auto;
   width: 440px;
 }
 
@@ -32,16 +34,22 @@
   }
 
 .content__avatar_button{
+  border: solid 5px #00FF7F;
+  background-color: #00FF7F;
+  border-radius: 10px;
   position: absolute;
   cursor: pointer;
   width: 25px;
   height: 25px;
-  opacity: .5;
 }
   
 .content__avatar_container{
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   cursor: pointer;
+  transition: .3s;
+  &:hover{
+    transform: scale(1.1);
+  }
 }
 
 .content__description_item{
@@ -53,7 +61,7 @@
 .description__item_icon{
   height: 25px;
   width: 25px;
-  opacity: .4;
+  opacity: .8;
 }
 
 .description__item_text{
@@ -65,6 +73,6 @@
   }
   .item__text_sign{
     font-size: 14px;
-    opacity: .4;
+    opacity: .5;
   }
 }

@@ -7,7 +7,7 @@
 .aboutMe__icon{
     height: 25px;
     width: 25px;
-    opacity: .4;
+    opacity: .8;
 }
 
 .aboutMe__text{
@@ -16,11 +16,11 @@
     padding-left: 25px;
     .aboutMe__field_text{
         font-size: 18px;
-        line-height: 1;
+        line-height: 1.2;
     }
     .aboutMe__sign{
         font-size: 14px;
-        opacity: .4;
+        opacity: .5;
       }
 }
 
@@ -29,10 +29,11 @@
 }
 
 .aboutMe__button_check{
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     opacity: 0.5;
     transition: .3s;
+    padding-left: 3px;
     cursor: pointer;
 }
 
@@ -44,7 +45,6 @@
     display: flex;
     line-height: 0.5;
     align-items: center;
-    height: 29px;
 }
 
 .aboutMe__field_button{
@@ -54,6 +54,11 @@
     padding: 0 0 2px 10px;
 }
 
+.aboutMe__button_edit{
+   width: 20px;
+   height: 20px; 
+}
+
 .aboutMe__field_button:hover{
     opacity: 1;
 }
@@ -61,7 +66,8 @@
 .aboutMe__textarea{
     height: 18px;
     width: 335px;
-    background-color: #f9f3ea;
+    background-color: #1C1C1C;
+    color: white;
     resize: none;
     outline: none;
     border-left: none;
