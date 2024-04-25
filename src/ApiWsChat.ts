@@ -25,7 +25,6 @@ const openHandler = () => {
 let currentId = 0
 export let getCurrenrId = (currentUserId: number) => currentId = currentUserId
 const messageHandler = (e: MessageEvent) => {
-    debugger
     subscribers["message-recieved"].forEach(subscriber => subscriber(currentId))
 }
 

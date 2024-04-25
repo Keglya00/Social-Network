@@ -1,5 +1,12 @@
 .content{
   width: 1310px;
   display: flex;
+}
 
+@media(max-width: 768px){
+  .content{
+    max-width: 768px;
+    width: 100%;
+    width: fit-content;
+  }
 }

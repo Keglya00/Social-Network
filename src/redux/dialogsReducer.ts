@@ -11,6 +11,7 @@ const SET_WS_STATUS = 'SET_WS_STATUS'
 const ADD_USER_CHATS = 'ADD_USER_CHATS'
 const SET_CURRENT_USER_ID = 'SET_CURRENT_USER_ID'
 const SET_CURRENT_USER_DATA = 'SET_CURRENT_USER_DATA'
+const DELETE_CURRENT_USER_ID = 'DELETE_CURRENT_USER_ID'
 
 type InitialStateType = typeof initialState
 export type StatusType = 'pending' | 'ready'
@@ -84,6 +85,12 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionTy
                 currentUserData: action.data
             }
         }
+        case DELETE_CURRENT_USER_ID: {
+            return{
+                ...state,
+                currentUserId: 0
+            }
+        }
         default: 
             return state         
     }
@@ -91,14 +98,13 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionTy
 }
 
 const newMessageHandler = (dispatch: Dispatch) => (currentId: number) => {
-    debugger
     dispatch(setMessages(currentId))
 }
 const newStatusHandler = (dispatch: Dispatch) => (wsStatus: StatusType) => {
     dispatch(setWsStatus(wsStatus))
 }
 
-type ActionType = AddMessagesType | SetWsStatusType | CleanMessagesDataType | AddUserChatsType | SetCurrentUserIdType | SetCurrentUserDataType
+type ActionType = AddMessagesType | SetWsStatusType | CleanMessagesDataType | AddUserChatsType | SetCurrentUserIdType | SetCurrentUserDataType | DeleteCurrentUserIdType
 type ThunkType = ThunkAction<Promise<void>, RootStateType, unknown, ActionType>
 
 type CleanMessagesDataType = {type: typeof CLEAN_MESSAGES_DATA}
@@ -115,6 +121,9 @@ export const addUserChats = (chats: Array<ChatType>): AddUserChatsType => {retur
 
 type SetCurrentUserIdType = {type: typeof SET_CURRENT_USER_ID, userId: number}
 export const setCurrentUserId = (userId: number): SetCurrentUserIdType => {return{type: SET_CURRENT_USER_ID, userId}}
+
+type DeleteCurrentUserIdType = {type: typeof DELETE_CURRENT_USER_ID}
+export const deleteCurrentUserId = (): DeleteCurrentUserIdType => {return{type: DELETE_CURRENT_USER_ID}}
 
 type SetCurrentUserDataType = {type: typeof SET_CURRENT_USER_DATA, data: CurrentUserDataType}
 export const setCurrentUserData = (userName: string, photo: string): SetCurrentUserDataType => {return{type: SET_CURRENT_USER_DATA, data: {photo, userName}}}

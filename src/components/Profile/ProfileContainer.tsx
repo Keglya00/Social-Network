@@ -8,6 +8,7 @@ import { withAuthReirect } from "../../hoc/withAuthRedirect.tsx";
 import { compose } from "redux";
 import { RootStateType } from "../../redux/redux-store.ts";
 import { addChat } from "../../redux/dialogsReducer.ts";
+import { Navigate, useNavigate } from "react-router-dom";
 
 type OwnPropsType = {
     params: {
@@ -52,8 +53,13 @@ const ProfileApiComponent: React.FC<PropsType> = (props) => {
         props.uploadAboutMe(props.profile, aboutMe)
     }
 
+    const navigate = useNavigate()
+
     let onAddChat = () => {
         props.addChat(Number(props.params.userId))
+        navigate({
+            pathname: '/dialogs'
+        })
     }
 
     return (
@@ -71,7 +77,6 @@ const ProfileApiComponent: React.FC<PropsType> = (props) => {
         </>
     )
 }
-
 
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {

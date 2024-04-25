@@ -1,0 +1,26 @@
+.content__menu{
+    position: absolute;
+    display: none;
+  }
+  
+  .content__menu_img{
+    opacity: .7;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    transition: .3s;
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+  
+  @media(max-width: 768px){
+    .content{
+      max-width: 768px;
+      width: 100%;
+      width: fit-content;
+    }
+    .content__menu{
+      display: block;
+    }
+  }

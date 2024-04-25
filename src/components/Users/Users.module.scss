@@ -25,7 +25,6 @@
     font-weight: 700;
     box-shadow: 0.5px 0px 0.5px 0.5px  #00FF7F;
     color: white;
-    opacity: .8;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,6 +33,11 @@
     margin-top: 30px;
     border-radius: 50px;
     transition: .3s;
+}
+
+.user__link{
+    width: 500px;
+    display: block;
 }
 
 .users__button:hover{
@@ -68,6 +72,7 @@
 .search__input {
     position: absolute;
     font-family: sans-serif;
+    color: white;
     font-size: 16px;
     opacity: .7;
     width: 300px;
@@ -82,5 +87,36 @@
     }
     &:hover{
         opacity: .8;
+    }
+}
+
+@media(max-width: 768px){
+    .users__container{
+        max-width: 768px;
+        height: 90vh;
+        width: 100vw;
+        margin: 0 auto;
+        vertical-align: middle;
+    }
+    .users{
+        max-width: 768px;
+        margin: auto 0;
+        width: 100vw;
+    }
+    .users__item{
+        width: 90vw;
+        margin: 10px auto;
+    }
+    .search__container{
+        width: 100vw;
+        height: fit-content;
+    }
+    .search{
+        width: 90vw;  
+        margin: 75px auto;
+    }
+    .search__input{
+        width: 80vw;
+        margin: 0 auto;
     }
 }

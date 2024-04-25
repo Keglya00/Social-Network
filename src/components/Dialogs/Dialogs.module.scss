@@ -38,14 +38,27 @@
     }
 }
 
-.dialogs__messages{
-    background-color: #151719;
+.dialogs__chats_mobile{
+    @extend .dialogs__chats
+}
+
+.dialogs__messages_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
     box-shadow: inset 4px 4px 4px 4px rgb(0, 0, 0 , 0.03);
     border-radius: 0 0 10px 10px;
+}
+
+.dialogs__messages_mobilecontainer{
+    @extend .dialogs__messages_container
+}
+
+.dialogs__messages{
     width: 965px;
+    background-color: #151719;
     overflow-y: scroll;
-    height: 550px;
-    font-family: Roboto;
+    height: 495px;
     font-size: 18px;
     font-weight: 500;
     &::-webkit-scrollbar{
@@ -58,9 +71,8 @@
 }
 
 %message{
-    margin: 0 120px;
     font-size: 15px;
-    padding: 2px 15px;
+    padding: 2px 150px;
     font-family: sans-serif;
 }
 
@@ -82,13 +94,33 @@
     border-radius: 10px 10px 0 0px;
 }
 
+.dialogs__user_mobilecontainer{
+    @extend .dialogs__user_container
+}
+
+.dialogs__arrow_container{
+    display: none;
+    margin: 10px 8px;
+    border-radius:20px;
+    &:hover{
+        background-color: rgba(170, 170, 170, 0.15);
+    }
+}
+
+.dialogs__user_arrow{
+    padding: 2px;
+    width: 25px;
+    height: 25px;
+    transform: rotate(180deg);
+}
+
 .dialogs__user{
     background-color: #1c1c1c;
-    margin-top: 1px;
     border-radius: 10px 10px 0 0px;
     width: 960px;
     height: 50px;
     display: flex;
+    align-items: center;
 }
 
 .dialogs__user_photo{
@@ -104,7 +136,8 @@
     font-weight: 700;
     font-family: sans-serif;
     font-size: 16px;
-    padding: 7px 15px;
+    padding: 0 15px;
+    margin-bottom: 10px;
 }
 
 .dialogs__addMessages_textarea{
@@ -131,7 +164,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 30px 0;
+    background-color: #151719;
+    padding: 20px 0 10px 0;
 }
 
 .dialogs__addMessages_button{
@@ -151,4 +185,63 @@
 
 .dialogs__addMessages_button:hover{
     transform: scale(1.1)
+}
+
+@media(max-width: 768px){
+    .dialogs__messages_container{
+        display: none;
+    }
+    .dialogs__messages_mobilecontainer{
+        display: flex;
+        max-width: 768px;
+        width: 100vw;
+    }
+    .dialogs__messages{
+        max-width: 768px;
+        height: 81vh;
+        width: 100vw;
+    }
+    .message{
+        padding: 2px 15px;
+    }
+    .mymessage{
+        padding: 2px 15px;
+    }
+    .dialogs__notSelected{
+        display: none;
+    }
+    .dialogs__user_container{
+        display: none;
+    }
+    .dialogs__user_mobilecontainer{
+        display: flex;
+        width: 100vw;
+        height: 8vh;
+    }
+    .dialogs__user{
+        max-width: 768px;
+        width: 100vw;
+        height: 8vh;
+    }
+    .dialogs__chats{
+        padding-top: 50px;
+        display: none;      
+    }
+    .dialogs__chats_mobile{
+        display: block;
+    }
+    .dialogs__addMessages_textarea{
+        max-width: 768px;
+    }
+    .dialogs__messages_addMessage{
+        height: 8vh;
+        width: 100vw;
+        padding: 20px 0 5px 0;
+    }
+    .dialogs__arrow_container{
+        display: block;
+    }
+    .dialogs__addMessages_button{
+        margin-right: 5px;
+    }
 }

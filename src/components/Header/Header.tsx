@@ -16,7 +16,6 @@ const Header: React.FC<PropsType> = (props) => {
             <div className={headerStyle.header__top}>
                 <div className={headerStyle.header__top_logo}>
                     <img src='' />
-                    Logo
                 </div>
                 <div className={headerStyle.header__top_name}>
                     ABSHCHKHDA Social Network

@@ -9,6 +9,8 @@ import { Field, Form } from 'react-final-form'
 import { required } from '../../utilits/validators.ts'
 import { ChatType, CurrentUserDataType, MessageType, StatusType} from '../../redux/dialogsReducer'
 import { getCurrenrId } from '../../ApiWsChat.ts'
+import MenuButton from '../Common/MenuButton/MenuButton.tsx'
+import arrow from '../../images/returnArrow.png'
 
 type PropsType = {
     chatsData: Array<ChatType>,
@@ -24,6 +26,7 @@ type PropsType = {
     setCurrentUserId: (userId: number) => void
     setMessages: (userId: number) => void
     setCurrentUserData: (userName: string, photo: string) => void
+    deleteCurrentUserId: () => void
 }
 type AddMessageFormPropsType = {
     wsStatus: StatusType
@@ -84,27 +87,33 @@ const Dialogs: React.FC<PropsType> = React.memo((props) => {
     )
 
     return(
+        <>
+        {props.currentUserId ? null : <MenuButton />}
         <div className={styleDialogs.dialogs}>
-            <ul className={styleDialogs.dialogs__chats}>
+            <ul className={props.currentUserId ? styleDialogs.dialogs__chats : styleDialogs.dialogs__chats_mobile}>
                 {chatsElements}
             </ul>
             {props.currentUserId ?
             <div>
-                <div className={styleDialogs.dialogs__user_container}> 
+                <div className={props.currentUserData ? styleDialogs.dialogs__user_mobilecontainer : styleDialogs.dialogs__user_container}>
                     <div className={styleDialogs.dialogs__user}>
+                        {props.currentUserData ? <div className={styleDialogs.dialogs__arrow_container} onClick={() => props.deleteCurrentUserId()} ><img className={styleDialogs.dialogs__user_arrow} src={arrow}/></div> : null}
                         <div><img className={styleDialogs.dialogs__user_photo} src={props.currentUserData.photo || noAvatar} /></div>
                         <div className={styleDialogs.dialogs__user_name}>{props.currentUserData.userName}</div>
                     </div>
                 </div>
-                <div className={styleDialogs.dialogs__messages} onScroll={scrollHandler}>
-                    {messagesElements}
-                    {props.currentUserId ? <AddMessageForm addMessage={onAddMessageClick} wsStatus={props.wsStatus} /> : null}
-                    <div ref={messagesAnchorRef}></div>
+                <div className={props.currentUserId ? styleDialogs.dialogs__messages_mobilecontainer : styleDialogs.dialogs__messages_container} onScroll={scrollHandler}>
+                    <div className={styleDialogs.dialogs__messages}>
+                        {messagesElements}
+                        <div ref={messagesAnchorRef}></div>
+                    </div>
                 </div>
+                {props.currentUserId ? <AddMessageForm addMessage={onAddMessageClick} wsStatus={props.wsStatus} /> : null}
             </div> :
             <div className={styleDialogs.dialogs__notSelected}></div>
             }   
         </div>
+        </>
     )
 })
 

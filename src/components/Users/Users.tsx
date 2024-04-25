@@ -5,6 +5,8 @@ import Paginator from '../Common/Paginator/Paginator.tsx'
 import React from 'react'
 import { UsersDataType } from '../../redux/usersReducer.ts'
 import { Field, Form, Formik } from 'formik'
+import { NavLink } from 'react-router-dom'
+import MenuButton from '../Common/MenuButton/MenuButton.tsx'
 
 type PropsType = {
     pagesCount: number,
@@ -24,21 +26,20 @@ type PropsType = {
 const Users: React.FC<PropsType> = (props) => {
     let usersElements = props.usersData.map(
             (user) => 
-            <li className={styleUsers.users__item}>
+            <NavLink to={'/profile/' + user.id} className={styleUsers.users__item}>
                 <User key={user.id} id={user.id} name={user.name} status={user.status} avatar={user.photos.small} />
                 {user.followed 
                 ? <button className={styleUsers.users__button} disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {props.onUserUnfollow(user.id)}} >unfollow</button> 
                 : <button className={styleUsers.users__button} disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {props.onUserFollow(user.id)}} >follow</button>
                 }
-            </li>
-        
+            </NavLink>
         )
 
     return(
+        <>
+        <MenuButton />
         <div className={styleUsers.users__container}>
-            <div>
-                <UserSearchForm onTermChanged={props.onTermChanged} term={props.term}/>
-            </div>
+            <UserSearchForm onTermChanged={props.onTermChanged} term={props.term}/>
             <div className={styleUsers.users}>
                 {usersElements}
                 
@@ -47,6 +48,7 @@ const Users: React.FC<PropsType> = (props) => {
             <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged} portionSize={props.portionSize} portionsCount={props.portionsCount} pagesCount={props.pagesCount} />
             </div>
         </div>
+        </>
     )
 }
 
@@ -64,7 +66,7 @@ const UserSearchForm: React.FC<FormPropsType> = (props) => {
     }
 
     return (
-    <div>
+    <div className={styleUsers.search__container}>
         <Formik
         enableReinitialize={true}
         initialValues={{term: props.term}}

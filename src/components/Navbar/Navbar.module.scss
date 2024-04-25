@@ -7,6 +7,10 @@
   height: 600px;
 }
 
+.mobilenav{
+  display: none;
+}
+
 .nav__list{
   margin: 40px 0;
   font-size: 18px;
@@ -30,4 +34,19 @@ a:hover{
 
 .active{
   transform: scale(1.15);
+}
+
+@media(max-width: 768px){
+  .nav{
+    display: none;
+  }
+  .mobilenav{
+    display: block;
+    width: 250px;
+  }
+  .nav__list{
+    margin: 70px 0;
+    line-height: 2;
+    font-size: 25px;
+  }
 }

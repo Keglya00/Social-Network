@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react'
-import { ChatType, MessageType, StatusType, sendMessage, setChats, setMessages, setCurrentUserId, startWsChannel, stopWsChannel, setCurrentUserData, CurrentUserDataType} from '../../redux/dialogsReducer.ts'
+import { ChatType, MessageType, StatusType, sendMessage, setChats, setMessages, setCurrentUserId, startWsChannel, stopWsChannel, setCurrentUserData, CurrentUserDataType, deleteCurrentUserId} from '../../redux/dialogsReducer.ts'
 import { connect } from 'react-redux'
 import Dialogs from './Dialogs.tsx'
 import { withAuthReirect } from '../../hoc/withAuthRedirect.tsx'
@@ -23,6 +23,7 @@ type MapDispatchToPropsType = {
     setMessages: (userId: number) => void
     setCurrentUserId: (userId: number) => void
     setCurrentUserData: (userName: string, photo: string) => void
+    deleteCurrentUserId: () => void
 }
 
 let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
@@ -37,6 +38,6 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsType => {
 }
 
 
-const DialogsContainer = compose<ComponentType>(connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, { startWsChannel, stopWsChannel, setCurrentUserData, sendMessage, setChats, setMessages, setCurrentUserId}), withAuthReirect )(Dialogs)
+const DialogsContainer = compose<ComponentType>(connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, { startWsChannel, stopWsChannel, setCurrentUserData, sendMessage, setChats, setMessages, setCurrentUserId, deleteCurrentUserId}), withAuthReirect )(Dialogs)
 
 export default DialogsContainer

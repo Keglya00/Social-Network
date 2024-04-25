@@ -13,9 +13,7 @@ type PropsType = {
  const User: React.FC<PropsType> = (props) => {
     return(
         <div className={styleUser.user}>
-            <NavLink to={'/profile/' + props.id}>
-                {props.avatar === null ? <div><img  className={styleUser.user__noavatar} src={noAvatar}/></div> : <img className={styleUser.user__avatar} src={props.avatar} /> }
-            </NavLink>
+            {props.avatar === null ? <div><img  className={styleUser.user__noavatar} src={noAvatar}/></div> : <img className={styleUser.user__avatar} src={props.avatar} /> }
             <div className={styleUser.user__description}>
                 <div className={styleUser.user__description_name}>
                     {props.name}

@@ -76,3 +76,10 @@
     opacity: .5;
   }
 }
+
+@media(max-width: 768px){
+  .content__top{
+    max-width: 340px;
+    margin: 50px auto;
+  }
+}

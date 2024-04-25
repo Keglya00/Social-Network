@@ -75,3 +75,9 @@
     border-right: none;
     font-size: 15px;
 }
+
+@media(max-width: 768px){
+    .aboutMe__textarea{
+    width: 200px;
+    }
+}
